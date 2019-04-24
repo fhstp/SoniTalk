@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="SoniTalk_library_scope" pattern="(src[sonitalk-sdk]:at.ac.fhstp.sonitalk..*||src[sonitalk-sdk]:values.*||test[sonitalk-sdk]:at.ac.fhstp.sonitalk.*)&amp;&amp;!src[sonitalk-sdk]:at.ac.fhstp.sonitalk.utils.HammingWindow&amp;&amp;!src[sonitalk-sdk]:at.ac.fhstp.sonitalk.utils.WindowFunction" />
+</component>

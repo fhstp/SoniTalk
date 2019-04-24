@@ -1,0 +1,63 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    libraryVariants.all { variant ->
+        task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
+            description "Generates Javadoc for $variant.name."
+            source = sourceSets.java.srcDirs
+            /* add the excluded packages */
+            exclude "**/R**"
+            exclude "**/BuildConfig*"
+            exclude "**/edu**"
+
+            ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+            classpath = files(variant.javaCompiler.classpath.files) + files(ext.androidJar)
+            //options.links("https://developer.android.com/reference/")
+
+            // Will generate UML diagrams from the source code
+            options.docletpath = configurations.umlDoclet.files.asType(List)
+            options.doclet = "nl.talsmasoftware.umldoclet.UMLDoclet"
+            //options.destinationDirectory = file("C:/Data/SoniTalk/${variant.name.capitalize()}_Javadoc/")
+        }
+
+        //assemble.dependsOn("generate${variant.name.capitalize()}Javadoc")
+    }
+
+    sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res/layout'] } }
+}
+
+configurations {
+    umlDoclet
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    umlDoclet "nl.talsmasoftware:umldoclet:1.1.3"
+
+    implementation 'uk.me.berndporr:iirj:1.1'
+    implementation 'de.dfki.mary:marytts-signalproc:5.1.2'
+    implementation 'org.apache.commons:commons-lang3:3.8.1'
+    implementation 'edu.emory.mathcs.util:emory-util-io:2.1'
+    implementation 'edu.emory.mathcs.util:emory-util-concurrent:2.1'
+    implementation 'edu.emory.mathcs:JTransforms:2.4'
+}

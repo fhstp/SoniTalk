@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2019. Alexis Ringot, Florian Taurer, Matthias Zeppelzauer.
+  ~
+  ~ This file is part of SoniTalk Android SDK.
+  ~
+  ~ SoniTalk Android SDK is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ SoniTalk Android SDK is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with SoniTalk Android SDK.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <string name="app_name">SoniTalk</string>
+    <string name="permission_level_question">\"Data-over-sound\" Privatsphäre- einstellung für %s:</string>
+    <string name="l2_permission_level_text">Strikt - Bei jeder Kommunikationsanfrage fragen</string>
+    <string name="l1_permission_level_text">Mittel - Bis zum nächsten Start der App zulassen</string>
+    <string name="l0_permission_level_text">Niedrig - Immer zulassen</string>
+    <string name="decline_permission_level_text">Ablehnen</string>
+    <string name="permission_request_positive_text">Erlauben</string>
+    <string name="permission_request_negative_text">Ablehnen</string>
+    <string name="permission_request_change_text">Einstellungen</string>
+    <string name="statusChannelName">\"Data-over-sound\" Statuskanal</string>
+    <string name="defaultStatusNotificationMessage">Bereit um die Kommunikation zu starten</string>
+    <string name="sendingStatusNotificationMessage">Sendet momentan...</string>
+    <string name="receivingStatusNotificationMessage">Empfängt momentan...</string>
+    <string name="sendingAndReceivingStatusNotificationMessage">Sendet und empfängt momentan...</string>
+    <string name="permission_request_l1_question">%s erlauben Daten über Sound zu senden/empfangen? (bis zum nächsten Start der App)</string>
+    <string name="permission_request_l2_question">%s erlauben Daten über Sound zu senden/empfangen? (nur dieses Mal)</string>
+    <string name="permission_request_title">Daten über Sound erlauben?</string>
+    <string name="permission_l0_description">ohne Fragen Daten über Sound austauschen</string>
+    <string name="permission_l0_label">Daten über Sound immer erlauben</string>
+</resources>

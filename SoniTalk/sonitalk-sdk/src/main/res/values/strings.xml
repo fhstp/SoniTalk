@@ -1,0 +1,58 @@
+<!--
+  ~ Copyright (c) 2019. Alexis Ringot, Florian Taurer, Matthias Zeppelzauer.
+  ~
+  ~ This file is part of SoniTalk Android SDK.
+  ~
+  ~ SoniTalk Android SDK is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ SoniTalk Android SDK is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with SoniTalk Android SDK.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <string name="app_name">SoniTalk</string>
+    <string name="context_preference_key" translatable="false">at.ac.fhstp.sonitalk.context_preference_key_</string>
+    <string name="permission_level_key" translatable="false">PERMISSION_LEVEL</string>
+    <string name="bundleRequestCode_key" translatable="false">BUNDLE_REQUEST_CODE_KEY</string>
+    <string name="currentRequestAction_key" translatable="false">CURRENT_REQUEST_ACTION</string>
+    <string name="currentRequestGranted_key" translatable="false">CURRENT_REQUEST_GRANTED</string>
+    <string name="currentRequestAnswered_key" translatable="false">CURRENT_REQUEST_ANSWERED</string>
+    <string name="permissionLevelWasSet_key" translatable="false">PERMISSION_LEVEL_WAS_SET</string>
+    <string name="permissionLevelWasAnswered_key" translatable="false">PERMISSION_LEVEL_WAS_ANSWERED</string>
+    <string name="statusChannelName">Data-over-sound Status Channel</string>
+    <string name="defaultStatusNotificationTitle" translatable="false">Data over sound</string>
+    <string name="defaultStatusNotificationMessage">Ready to start communicating</string>
+    <string name="sendingStatusNotificationTitle" translatable="false">Data over sound</string>
+    <string name="sendingStatusNotificationMessage">Currently sending...</string>
+    <string name="receivingStatusNotificationTitle" translatable="false">Data over sound</string>
+    <string name="receivingStatusNotificationMessage">Currently receiving...</string>
+    <string name="sendingAndReceivingStatusNotificationTitle" translatable="false">Data over sound</string>
+    <string name="sendingAndReceivingStatusNotificationMessage">Currently sending and Receiving...</string>
+    <string name="l2_permission_level_text">Strict - Ask on each communication request</string>
+    <string name="l1_permission_level_text">Moderate - Allow until next start of app</string>
+    <string name="l0_permission_level_text">Low - Allow always</string>
+    <string name="decline_permission_level_text">Decline</string>
+    <string name="permission_level_question">Choose data-over-sound privacy setting for %s app:</string>
+    <string name="permission_request_l1_question">Allow %s to send/receive data via sound ? (until next start of the app)</string>
+    <string name="permission_request_l2_question">Allow %s to send/receive data via sound ? (just this time)</string>
+    <string name="permission_request_positive_text">Allow</string>
+    <string name="permission_request_negative_text">Deny</string>
+    <string name="permission_request_title">Allow data over sound ?</string>
+    <string name="permission_request_change_text">Settings</string>
+    <string name="permission_l0_description">exchange data over sound without asking</string>
+    <string name="permission_l0_label">Always allow data over sound</string>
+    <string-array name="permission_level_texts">
+        <item>@string/l0_permission_level_text</item>
+        <item>@string/l1_permission_level_text</item>
+        <item>@string/l2_permission_level_text</item>
+        <item>@string/decline_permission_level_text</item>
+    </string-array>
+</resources>
