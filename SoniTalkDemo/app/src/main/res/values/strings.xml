@@ -1,0 +1,95 @@
+<!--
+  ~ Copyright (c) 2019. Alexis Ringot, Florian Taurer, Matthias Zeppelzauer.
+  ~
+  ~ This file is part of SoniTalk Demo app.
+  ~
+  ~ SoniTalk Demo app is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ SoniTalk Demo app is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with SoniTalk Demo app.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <string name="app_name" translatable="false">SoniTalk Demo</string>
+    <string name="permissionRequestExplanation">Microphone permission is needed to receive messages via sound.</string>
+    <string name="l0permissionRequestExplanation">Data-over-sound permission is needed to send/receive messages via sound.</string>
+    <string-array name="numberOfFrequenciesVisible">
+        <item>8 Frequencies</item>
+        <item>16 Frequencies</item>
+        <item>24 Frequencies</item>
+        <item>32 Frequencies</item>
+        <item>40 Frequencies</item>
+        <item>48 Frequencies</item>
+    </string-array>
+    <string-array name="numberOfFrequencies">
+        <item>8</item>
+        <item>16</item>
+        <item>24</item>
+        <item>32</item>
+        <item>40</item>
+        <item>48</item>
+    </string-array>
+
+    <string name="action_reset_settings_message">Do you want to reset all settings?</string>
+    <string name="action_reset_settings_title">Reset Settings</string>
+    <string name="signal_generator_not_created">No Signal was created yet!</string>
+    <string name="encoder_exception_text_too_long">The text is too long please type in a shorter message!</string>
+    <string name="encoder_exception_text_too_many_bytes">Too many bytes entered</string>
+    <string name="decoder_exception_state">Failed to start listening, error message :</string>
+    <string name="decoder_exception_io">Failed to start listening due to an error on loading the default detection profile, details:</string>
+    <string name="decoder_exception_config">Failed to start listening due to an error on loading the default detection profile, details:</string>
+    <string name="permission_request_explanation_positive">Open the Permission Menu</string>
+    <string name="permission_request_explanation_negative">No thanks</string>
+    <string name="detection_crc_incorrect">CRC checksum incorrect. Please try again.</string>
+    <string name="detection_crc_incorrect_keep_listening">CRC checksum incorrect. Keep listening. Please try again</string>
+    <string name="detection_crc_incorrect_toast_message">Detected a message, but CRC checksum is incorrect.</string>
+    <string name="detection_crc_incorrect_keep_listening_toast_message">Detected a message, but CRC checksum is incorrect. Keep listening.</string>
+    <string name="on_receiving_listening_permission_required">Data-over-sound permission required to receive messages</string>
+    <string name="on_sending_sending_permission_required">Data-over-sound permission required to send messages</string>
+    <string name="decoder_start_text">Start listening...</string>
+    <string name="settings_bitperiod_text">Bit period (%s ms)</string>
+    <string name="settings_pauseperiod_text">Pause period (%s ms)</string>
+    <string name="settings_frequency0_text">Base frequency (%s Hz)</string>
+    <string name="settings_frequencyspace_text">Frequency space (%s Hz)</string>
+    <string name="settings_maxbytes_text">Maximum message length (%s bytes)</string>
+    <string name="settings_numberoffrequencies_text">Number of frequencies (%s)</string>
+    <string name="settings_loudness_text">Volume</string>
+    <string name="settings_reset_title">Reset settings</string>
+    <string name="settings_preset_title">Preset (%s)</string>
+    <string name="gui_message_title">Preset configuration (%s)</string>
+    <string name="section_name_sending">Send</string>
+    <string name="section_name_receiving">Receive</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_about_us">About us</string>
+    <string name="menu_instructions">Developers</string>
+    <string name="menu_privacy_policy">Privacy policy</string>
+    <string name="menu_help">Help</string>
+    <string name="preset_undefined">undefined</string>
+    <string name="settings_configuration_alert_title">Select configuration preset</string>
+    <string name="privacy_policy_text">"SoniTalk Demo app privacy policy:\n\n
+- This app uses data over sound to transfer information via the acoustic channel.\n\n
+- Sounds are analyzed in real time on the phone. They are not sent to the web, nor stored on the phone.\n\n
+ - No personal information is acquired (except for potential bug report via the Google Play Store which may include information about the device, e.g. the OS version and device model).     "</string>
+    <string name="about_us_text">Ultrasonic communication (UC) is increasingly used for data exchange between mobile phones and other devices, as well as for location-based services. UC is attractive because it is inaudible and very low-threshold in terms of the hardware required (only microphone and speaker required). Today, there exist several proprietary solutions for UC on the market, which are developed by companies in a closed source form, which raises questions regarding the protection of users\' privacy, since it is not clear which data is actually sent, when and to whom.
+\n\nSoniTalk is a novel open and transparent protocol for ultrasonic communication between devices such as smartphones, TVs, and IoT devices. Thereby SoniTalk gives the user full control over her privacy by a fine grained permission system.
+\n\nThe project SoniTalk has been financially supported by the funding program netidee (http://www.netidee.at) and has been developed in a research project at the Institute for Creative Media Technologies at the University of Applied Sciences Sankt Pölten (http://sonitalk.fhstp.ac.at).
+\n\nThe project was pursued by Matthias Zeppelzauer, Alexis Ringot and Florian Taurer at the Media Computing Group of the University of Applied Sciences in St. Pölten. In the future, SoniTalk could benefit various industries as well as end consumers with new communication possibilities.
+\n\nIn case of questions, bugs, ideas, please contact us directly under http://sonitalk.fhstp.ac.at/#contact.</string>
+    <string name="instructions_title">Instruction</string>
+    <string name="instructions_text">Welcome to the SoniTalk Demo app.
+\n\nThis app demonstrates the use of the SoniTalk protocol for communication over sound. The default setting uses (near) ultrasonic frequencies.
+\n\nYou can type in a message and send it by tapping on the button next to the text.
+\n\nTo receive a message, you only need to tap on the ear button. Received messages will be shown next to it. If a message was detected but could not be decoded, you will see the following message: (%s)
+\nYou can try to receive the message again and/or change settings. Please make sure that the device sending and the device receiving use the same configuration.
+\n\nThe SoniTalk Demo app needs access to the microphone for receiving messages and the custom data-over-sound permission to send and receive messages.
+\n\nWe do not transmit any data from your phone (apart from the text you decide to send) and do not store any privacy-sensitive data.</string>
+    <string name="creditsText">Credits \n\n Iirj (https://github.com/berndporr/iirj/)\n\n JTransforms, Utilities (https://mvnrepository.com/artifact/edu.emory.mathcs/)\n\n MaryTTS (https://github.com/marytts/marytts/)\n\nHamming Window by Benjamin Elliott (https://github.com/benelliott/spectrogram-android)\n\nMaterial Icons and the Apache Commons Library are used, which are under the license of Apache License Version 2.0 (https://www.apache.org/licenses/LICENSE-2.0.txt )</string>
+</resources>

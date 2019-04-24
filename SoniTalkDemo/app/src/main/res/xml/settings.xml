@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2019. Alexis Ringot, Florian Taurer, Matthias Zeppelzauer.
+  ~
+  ~ This file is part of SoniTalk Demo app.
+  ~
+  ~ SoniTalk Demo app is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ SoniTalk Demo app is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with SoniTalk Demo app.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Settings">
+
+        <android.support.v7.preference.EditTextPreference
+            android:defaultValue="18000"
+            android:key="etprefFrequencyZero"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:inputType="number"
+            android:title="@string/settings_frequency0_text" />
+        <android.support.v7.preference.EditTextPreference
+            android:defaultValue="100"
+            android:key="etprefBitperiod"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:inputType="number"
+            android:title="@string/settings_bitperiod_text" />
+        <android.support.v7.preference.EditTextPreference
+            android:defaultValue="0"
+            android:key="etprefPauseperiod"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:inputType="number"
+            android:title="@string/settings_pauseperiod_text" />
+        <android.support.v7.preference.EditTextPreference
+            android:defaultValue="100"
+            android:key="etprefFrequencyspace"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:inputType="number"
+            android:title="@string/settings_frequencyspace_text" />
+        <android.support.v7.preference.EditTextPreference
+            android:defaultValue="18"
+            android:key="etprefNMaxBytes"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:inputType="number"
+            android:title="@string/settings_maxbytes_text" />
+        <android.support.v7.preference.ListPreference
+            android:key="lpprefNFrequencies"
+            android:title="@string/settings_numberoffrequencies_text"
+            android:entries="@array/numberOfFrequenciesVisible"
+            android:entryValues="@array/numberOfFrequencies" />
+        <android.support.v7.preference.SeekBarPreference
+            android:key="sbprefLoudness"
+            android:title="@string/settings_loudness_text"
+            android:max="100"
+            android:defaultValue="70"
+            android:inputType="number"/>
+        <Preference
+            android:key="setPresetPreferences"
+            android:title="@string/settings_preset_title"></Preference>
+        <Preference
+            android:key="resetPreferences"
+            android:title="@string/settings_reset_title"></Preference>
+    </PreferenceCategory>
+</android.support.v7.preference.PreferenceScreen>

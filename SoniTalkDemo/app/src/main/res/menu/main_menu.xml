@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2019. Alexis Ringot, Florian Taurer, Matthias Zeppelzauer.
+  ~
+  ~ This file is part of SoniTalk Demo app.
+  ~
+  ~ SoniTalk Demo app is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ SoniTalk Demo app is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with SoniTalk Demo app.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/help"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_info_outline_white_48dp"
+        android:title="@string/menu_help"/>
+    <item
+        android:id="@+id/settings"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:icon="@drawable/baseline_settings_white_48"
+        android:title="@string/menu_settings"/>
+
+    <item
+        android:id="@+id/open_about_us"
+        android:title="@string/menu_about_us">
+    </item>
+    <item android:visible="false"
+        android:id="@+id/open_github"
+        android:title="@string/menu_instructions">
+    </item>
+    <item
+        android:id="@+id/open_privacy_policy"
+        android:title="@string/menu_privacy_policy">
+    </item>
+
+
+</menu>

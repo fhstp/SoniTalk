@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2019. Alexis Ringot, Florian Taurer, Matthias Zeppelzauer.
+  ~
+  ~ This file is part of SoniTalk Demo app.
+  ~
+  ~ SoniTalk Demo app is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ SoniTalk Demo app is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with SoniTalk Demo app.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <string name="permission_request_explanation_negative">Nein danke</string>
+    <string name="action_reset_settings_title">Einstellungen zurücksetzen</string>
+    <string name="settings_numberoffrequencies_text">Anzahl Frequenzen (%s)</string>
+    <string name="settings_reset_title">Einstellungen zurücksetzen</string>
+    <string name="permissionRequestExplanation">Für den Empfang von Nachrichten über Sound ist das Mikrofon erforderlich.</string>
+    <string name="l0permissionRequestExplanation">Für die Kommunikation ist die \"Data-over-sound\"-Berechtigung erforderlich.</string>
+    <string name="action_reset_settings_message">Möchten Sie alle Einstellungen zurücksetzen?</string>
+    <string name="signal_generator_not_created">Es wurde kein Signal generiert!</string>
+    <string name="encoder_exception_text_too_long">Der Text ist zu lang. Bitte geben sie eine kürzere Nachricht ein!</string>
+    <string name="encoder_exception_text_too_many_bytes">Zu viele Bytes eingegeben</string>
+    <string name="decoder_exception_state">Akustischer Empfang ist fehlgeschlagen. Fehlermeldung:</string>
+    <string name="decoder_exception_io">Akustischer Empfang ist aufgrund eines Ladefehlers des Standard-Erkennungsprofils fehlgeschlagen, Details:</string>
+    <string name="decoder_exception_config">Akustischer Empfang ist aufgrund eines Ladefehlers des Standard-Erkennungsprofils fehlgeschlagen, Details:</string>
+    <string name="section_name_sending">Senden</string>
+    <string name="section_name_receiving">Empfangen</string>
+    <string name="menu_settings">Einstellungen</string>
+    <string name="menu_about_us">Über Uns</string>
+    <string name="menu_instructions">Developers</string>
+    <string name="menu_privacy_policy">Datenschutzerklärung</string>
+    <string name="menu_help">Hilfe</string>
+    <string name="detection_crc_incorrect">Die CRC-Prüfsumme ist inkorrekt. Bitte versuchen Sie es nochmal.</string>
+    <string name="detection_crc_incorrect_keep_listening">Die CRC-Prüfsumme ist falsch. Empfange weiter. Bitte versuchen Sie es nocheinmal.</string>
+    <string name="detection_crc_incorrect_toast_message">Eine Nachricht wurde empfangen, aber die CRC-Prüfsumme ist inkorrekt.</string>
+    <string name="detection_crc_incorrect_keep_listening_toast_message">Eine Nachricht wurde empfangen, aber die CRC-Prüfsumme ist inkorrekt. Hört weiter zu.</string>
+    <string name="on_sending_sending_permission_required">Sendeberechtigung ist erforderlich...</string>
+    <string name="on_receiving_listening_permission_required">Empfangsberechtigung ist erforderlich...</string>
+    <string name="permission_request_explanation_positive">Öffne das Berechtigungsmenü</string>
+    <string name="decoder_start_text">Empfang gestartet...</string>
+    <string name="settings_bitperiod_text">Dauer eines Bits (%s ms)</string>
+    <string name="settings_pauseperiod_text">Dauer einer Pause (%s ms)</string>
+    <string name="settings_frequency0_text">Basisfrequenz (%s Hz)</string>
+    <string name="settings_frequencyspace_text">Frequenzabstand (%s Hs)</string>
+    <string name="settings_maxbytes_text">Maximale Nachrichtenlänge (%s Bytes)</string>
+    <string name="settings_loudness_text">Lautstärke</string>
+    <string name="settings_preset_title">Voreingestellte Konfiguration (%s)</string>
+    <string name="preset_undefined">undefiniert</string>
+    <string name="gui_message_title">Voreingestellte Konfiguration (%s)</string>
+    <string name="settings_configuration_alert_title">Wählen Sie eine Konfigurationsvoreinstellung</string>
+    <string name="privacy_policy_text">"SoniTalk App Datenschutzerklärung:\n\n
+-Diese App verwendet "data-over-sound" um Informationen über den akustischen Bereich zu versenden.\n\n
+-Geräusche werden in Echtzeit auf dem Smartphone verarbeitet. Die Daten werden nicht über das Web geschickt und auch nicht am Smartphone gespeichert.\n\n
+-Es werden keine persönlichen Informationen benötigt (außer für eventuelle Fehlermeldungen an den Google Play Store, welche Informationen über das Gerät z.B. die Betriebssystemversion oder das Gerätemodell beinhalten kann)."</string>
+    <string name="about_us_text">Ultraschallkommunikation (UK) wird zunehmend für den Datenaustausch zwischen Mobiltelefonen und Endgeräten, sowie für Location-based Services eingesetzt. UK wird angewendet, weil sie unhörbar und sehr niederschwellig in Bezug auf die benötigte Hardware ist (nur Mikrofon und Lautsprecher werden benötigt). Es existieren mittlerweile mehrere proprietäre Lösungen für UK welche von Firmen geschlossen entwickelt werden. Diese sind kostenpflichtig und werfen Fragen bezüglich des Schutzes der Privatsphäre der UserInnen auf.
+\n\nSoniTalk ist ein quelloffenes, transparentes und vollständig Privatsphäre-orientiertes Protokoll für UK zwischen Endgeräten, wie Smartphones, Fernsehern und IoT-Geräten. Dadurch gibt SoniTalk dem Benutzer die volle Kontrolle über seine Privatsphäre. Dies passiert durch ein fein abgestuftes Berechtigungssystem, das es dem Benutzer ermöglicht, die Ultraschallaktivität jeder Anwendung separat zu steuern und zu verwalten.
+\n\nDas Projekt SoniTalk wurde finanziell unterstützt von der Internet Privatstiftung Netidee (http://www.netidee.at) und wurde im Rahmen eines Forschungsprojekts im Institut für Creative\Media/Technologies an der Fachhochschule St. Pölten entwickelt (http://sonitalk.fhstp.ac.at).
+\n\nDas Projekt wurde von Matthias Zeppelzauer, Alexis Ringot und Florian Taurer an der Media Computing Group der Fachhochschule St. Pölten durchgeführt. In Zukunft könnte SoniTalk sowohl verschiedenen Branchen als auch Endverbrauchern mit neuen Kommunikationsmöglichkeiten zugute kommen.
+\n\nBei Fragen, Bugs, Ideen, kontaktieren Sie uns bitte direkt unter http://sonitalk.fhstp.ac.at/#contact oder der Email-Adresse sonitalk@fhstp.ac.at.</string>
+    <string name="instructions_title">Anleitung</string>
+    <string name="instructions_text">Willkommen zur SoniTalk Demo App.
+\n\nDiese App demonstriert die Verwendung des SoniTalk-Protokolls für die Kommunikation über Sound. Die Standardeinstellung verwendet (nahe) Ultraschallfrequenzen.
+\n\nSie können eine Nachricht eingeben und versenden, indem Sie auf die Schaltfläche neben dem Text tippen.
+\n\nUm eine Nachricht zu empfangen, müssen Sie nur auf die Schaltfläche mit dem Ohr tippen. Empfangene Nachrichten werden daneben angezeigt. Wenn eine Nachricht erkannt wurde, aber nicht dekodiert werden konnte, sehen Sie die folgende Nachricht: (%s)
+\nSie können versuchen, die Nachricht erneut zu empfangen und/oder die Einstellungen zu ändern. Bitte stellen Sie sicher, dass das sendende und das empfangende Gerät die gleiche Konfiguration verwenden.
+\n\nDie SoniTalk Demo App benötigt Zugriff auf das Mikrofon zum Empfangen von Nachrichten und die "Data-over-sound"-Berechtigung zum Senden und Empfangen von Nachrichten.
+\n\nWir übertragen keine Daten von Ihrem Mobiltelefon und speichern keine datenschutzrelevanten Daten.</string>
+    <string name="creditsText">Credits \n\n Iirj (https://github.com/berndporr/iirj/)\n\n JTransforms, Utilities (https://mvnrepository.com/artifact/edu.emory.mathcs/)\n\n MaryTTS (https://github.com/marytts/marytts/)\n\nHamming Window by Benjamin Elliott (https://github.com/benelliott/spectrogram-android)\n\nMaterial Icons und die Apache Commons Library wurden verwendet. Diese stehen unter der Lizenz "Apache License Version 2.0"(https://www.apache.org/licenses/LICENSE-2.0.txt )</string>
+</resources>
