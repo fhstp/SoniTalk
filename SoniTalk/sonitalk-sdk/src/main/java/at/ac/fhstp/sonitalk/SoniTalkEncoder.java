@@ -31,8 +31,8 @@ import at.ac.fhstp.sonitalk.utils.SignalType;
 
 
 /**
- * The SoniTalkEncoder encodes the forwarded byte array and uses a SignalGenerator
- * to get the raw audio data. This audio data is then concatenated to have the right
+ * Encodes the forwarded byte array and uses a SignalGenerator to get the raw
+ * audio data. This audio data is then concatenated to have the right
  * shape for creating an audio track and sending it.
  */
 public class SoniTalkEncoder {

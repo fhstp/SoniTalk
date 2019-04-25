@@ -24,6 +24,10 @@ import android.os.Handler;
 import android.os.Parcel;
 import android.os.ResultReceiver;
 
+/**
+ * Receiver interface for classes that should listen for callbacks from SoniTalk.
+ * Result codes are currently defined in SoniTalkContext.
+ */
 public class SoniTalkPermissionsResultReceiver extends ResultReceiver {
     public static final String soniTalkPermissionsResultReceiverTag = "at.ac.fhstp.soniTalkPermissionsResultReceiverTag";
 
@@ -33,6 +37,10 @@ public class SoniTalkPermissionsResultReceiver extends ResultReceiver {
         super(handler);
     }
 
+    /**
+     * Receiver interface for classes that should listen for callbacks from SoniTalk.
+     * Result codes are currently defined in SoniTalkContext.
+     */
     public interface Receiver {
         /**
          * Receiver interface for classes that should listen for callbacks from SoniTalk.

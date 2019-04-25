@@ -19,6 +19,7 @@
 
 package at.ac.fhstp.sonitalk;
 
+
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
@@ -36,6 +37,9 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Handles the sendjob and playing of the actual audiotrack.
+ */
 public class SoniTalkSender {
     private final String TAG = this.getClass().getSimpleName();
     private final SoniTalkContext soniTalkContext;
@@ -43,11 +47,11 @@ public class SoniTalkSender {
     // Define the list of accepted constants for SenderState annotation
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({STATE_IDLE, STATE_SENDING/*, STATE_PAUSED, STATE_STOPPED*/})
-    public @interface SenderState {}
+            /*package-private*/ @interface SenderState {}
 
     // SenderState constants
-    public static final int STATE_IDLE = 0;
-    public static final int STATE_SENDING = 1;
+    /*package-private*/ static final int STATE_IDLE = 0;
+    /*package-private*/ static final int STATE_SENDING = 1;
     //public static final int STATE_PAUSED = 2;
     //public static final int STATE_STOPPED = 3;
 

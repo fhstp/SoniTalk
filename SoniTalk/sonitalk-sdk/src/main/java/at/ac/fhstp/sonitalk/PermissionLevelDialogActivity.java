@@ -34,6 +34,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+/**
+ * Activity for the different permission levels. Consists of a fragment with
+ * the alert dialog and a listener.
+ */
 public class PermissionLevelDialogActivity extends AppCompatActivity {
     private static final String TAG_PermissionLevelDialogFragment = "TAG_PermissionLevelDialogFragment";
     /*package-private*/static final String EXTRA_PERMISSION_LEVEL_LISTENER = "at.ac.fhstp.sonitalk.EXTRA_PERMISSION_LEVEL_LISTENER";
@@ -44,11 +48,11 @@ public class PermissionLevelDialogActivity extends AppCompatActivity {
     /* The Intent that calls this activity must contain a EXTRA_PERMISSION_LEVEL_LISTENER extra that
      * implements this interface in order to receive event callbacks.
      * Each method passes the DialogFragment in case the host needs to query it. */
-    public interface PermissionLevelDialogListener extends Parcelable {
-        public void onL0Click(DialogFragment dialog);
-        public void onL1Click(DialogFragment dialog);
-        public void onL2Click(DialogFragment dialog);
-        public void onDeclineClick(DialogFragment dialog);
+    /*package-private*/ interface PermissionLevelDialogListener extends Parcelable {
+        void onL0Click(DialogFragment dialog);
+        void onL1Click(DialogFragment dialog);
+        void onL2Click(DialogFragment dialog);
+        void onDeclineClick(DialogFragment dialog);
     }
 
     @Override
@@ -63,6 +67,9 @@ public class PermissionLevelDialogActivity extends AppCompatActivity {
         dialog.show(getSupportFragmentManager(), TAG_PermissionLevelDialogFragment);
     }
 
+    /**
+     * Contains the alert dialog for the permission levels.
+     */
     public static class PermissionLevelDialogFragment extends DialogFragment {
         // Use this instance of the interface to deliver action events
         PermissionLevelDialogListener internalListener;

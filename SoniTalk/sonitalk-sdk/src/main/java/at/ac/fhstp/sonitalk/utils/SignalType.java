@@ -19,7 +19,9 @@
 
 package at.ac.fhstp.sonitalk.utils;
 
-
+/**
+ * Enum that consists of different types for creating signals.
+ */
 public enum SignalType {
     /***
      * WARNING: Changing the String values would make the app incompatible with previous version.

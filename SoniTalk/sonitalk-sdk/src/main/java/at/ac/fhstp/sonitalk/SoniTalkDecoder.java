@@ -57,21 +57,43 @@ public class SoniTalkDecoder {
     // Define the list of accepted constants for DecoderState annotation
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({STATE_INITIALIZED, STATE_LISTENING, STATE_CANCELLED, STATE_STOPPED})
-    public @interface DecoderState {}
+    /*package-private*/ @interface DecoderState {}
 
+    /**
+     * Interface defining the callbacks to implement in order to receive messages from a SoniTalk Decoder.
+     */
     public interface MessageListener {
+        /**
+         * Called when a message is received by the SoniTalkDecoder.
+         * @param receivedMessage message detected and received by the SDK.
+         */
         void onMessageReceived(SoniTalkMessage receivedMessage);
+
+        /**
+         * Called when an error and/or exception occur in the SoniTalkDecoder.
+         * @param errorMessage description of an error that occurred while trying to receive a message.
+         */
         void onDecoderError(String errorMessage);
     }
+
+    /**
+     * Interface defining the callbacks to implement in order to receive the spectrum of received messages.
+     */
     public interface SpectrumListener {
+        /**
+         * Called when a message is received by the SoniTalkDecoder. Contains the spectrum as a two
+         * dimensional array that can then be visualized for further analysis of the detection.
+         * @param spectrum two dimensional array containing energy levels for each frequency.
+         * @param crcIsCorrect true if no error was detected by the CRC checksum.
+         */
         void onSpectrum(float[][] spectrum, boolean crcIsCorrect);
     }
 
     // DecoderState constants
-    public static final int STATE_INITIALIZED = 0;
-    public static final int STATE_LISTENING = 1;
-    public static final int STATE_CANCELLED = 2;
-    public static final int STATE_STOPPED = 3;
+    /*package-private*/ static final int STATE_INITIALIZED = 0;
+    /*package-private*/ static final int STATE_LISTENING = 1;
+    /*package-private*/ static final int STATE_CANCELLED = 2;
+    /*package-private*/ static final int STATE_STOPPED = 3;
 
     private List<MessageListener> messageListeners = new ArrayList<>();
     private List<SpectrumListener> spectrumListeners = new ArrayList<>();
@@ -97,9 +119,9 @@ public class SoniTalkDecoder {
     private int bandPassFilterOrder;// = 8;
     private int stepFactor;// = 8;
 
-    int nNeighborsFreqUpDown = 1;
-    int nNeighborsTimeLeftRight = 1;
-    String aggFcn = "median";
+    private int nNeighborsFreqUpDown = 1;
+    private int nNeighborsTimeLeftRight = 1;
+    private String aggFcn = "median";
 
     private int requestCode;
 

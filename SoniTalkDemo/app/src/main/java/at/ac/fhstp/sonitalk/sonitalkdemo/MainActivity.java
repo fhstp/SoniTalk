@@ -389,7 +389,7 @@ public class MainActivity extends BaseActivity implements SoniTalkDecoder.Messag
             if (soniTalkContext == null) {
                 soniTalkContext = SoniTalkContext.getInstance(this, soniTalkPermissionsResultReceiver);
             }
-            soniTalkDecoder = soniTalkContext.getDecoder(samplingRate, config, stepFactor, frequencyOffsetForSpectrogram, silentMode);
+            soniTalkDecoder = soniTalkContext.getDecoder(samplingRate, config); //, stepFactor, frequencyOffsetForSpectrogram, silentMode);
             soniTalkDecoder.addMessageListener(this); // MainActivity will be notified of messages received (calls onMessageReceived)
             //soniTalkDecoder.addSpectrumListener(this); // Can be used to receive the spectrum when a message is decoded.
 

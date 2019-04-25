@@ -23,6 +23,7 @@ package at.ac.fhstp.sonitalk;
  * Configuration, or profile, used to transmit data. The emitter and receiver of a message must use
  * the same configuration. A crucial use case will be transmitting with several profiles simultaneously.
  * This will allow for faster communication within one app and simultaneous communication of several apps.
+ * To get preset configurations, the utility class ConfigFactory has the function loadFromJson().
  */
 public class SoniTalkConfig {
     private int frequencyZero;// = 18000; (Hz)

@@ -30,6 +30,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+/**
+ * Activity for the decision on one permission level. Consists of a fragment with
+ * the alert dialog and a listener.
+ */
 public class PermissionRequestDialogActivity extends AppCompatActivity {
     private static final String TAG_PermissionRequestDialogFragment = "TAG_PermissionRequestDialogFragment";
     /*package-private*/static final String EXTRA_PERMISSION_REQUEST_LISTENER = "at.ac.fhstp.sonitalk.EXTRA_PERMISSION_REQUEST_LISTENER";
@@ -40,10 +44,10 @@ public class PermissionRequestDialogActivity extends AppCompatActivity {
     /* The Intent that calls this activity must contain a EXTRA_PERMISSION_REQUEST_LISTENER extra that
      * implements this interface in order to receive event callbacks.
      * Each method passes the DialogFragment in case the host needs to query it. */
-    public interface PermissionRequestDialogListener extends Parcelable {
-        public void onGrantClick(DialogFragment dialog);
-        public void onDenyClick(DialogFragment dialog);
-        public void onChangeSettingsClick(DialogFragment dialog);
+    /*package-private*/ interface PermissionRequestDialogListener extends Parcelable {
+        void onGrantClick(DialogFragment dialog);
+        void onDenyClick(DialogFragment dialog);
+        void onChangeSettingsClick(DialogFragment dialog);
     }
 
     @Override
@@ -59,6 +63,9 @@ public class PermissionRequestDialogActivity extends AppCompatActivity {
         dialog.show(getSupportFragmentManager(), TAG_PermissionRequestDialogFragment);
     }
 
+    /**
+     * Contains the alert dialog for the permission levels.
+     */
     public static class PermissionRequestDialogFragment extends DialogFragment {
         // Deliver action events to the listener
         PermissionRequestDialogListener listener;

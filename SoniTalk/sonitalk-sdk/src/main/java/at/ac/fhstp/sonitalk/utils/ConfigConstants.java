@@ -38,6 +38,7 @@ public class ConfigConstants {
     public static final String SPACE_BETWEEN_FREQUENCIES = "space-between-frequencies"; // In Hz
     /*** ***/
 
+    /* NOT used in this version.
     public static final String NUMBER_OF_MAX_CHARACTERS = "number-of-max-characters";
     public static final String NUMBER_OF_PARITY_BYTES = "number-of-parity-bytes";
     // Should these be moved to an app specific class (currently used from the MainActivity to store UI content in SharedPreferences) ?
@@ -47,7 +48,7 @@ public class ConfigConstants {
     public static final String SIGNAL_TEXT = "signal-text"; //Used in Encoder demo MainActivity
     // Remove, always false
     public static final String IS_PAUSE_ACTIVE = "is-pause-active"; //Used in Encoder demo MainActivity
-
+*/
     public static final byte[] GENERATOR_POLYNOM = new byte[] { 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1}; //CRC-17-CAN : 0x1685B
     public static final String CONTROL_FILLING_CHARACTER = "00011001";
 }

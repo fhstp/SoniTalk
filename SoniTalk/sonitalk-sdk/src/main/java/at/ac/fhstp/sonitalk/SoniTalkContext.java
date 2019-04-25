@@ -34,6 +34,12 @@ import android.support.v4.content.ContextCompat;
 
 import java.util.EnumSet;
 
+/**
+ * Allows to create objects of the Encoder, Decoder and Sender. It handles
+ * the creation, initialization, updated and cancelation of notifications. Beside that the
+ * SoniTalkContext contains the request codes for the permission levels, granting and denying
+ * permission requests and checking if a send job is finished.
+ */
 public class SoniTalkContext {
     /**
      * Will be sent to the SoniTalkPermissionsResultReceiver when the user chose to "Decline" when
@@ -126,30 +132,80 @@ public class SoniTalkContext {
         permissionManager.sendJobFinished(appContext, requestCode);
     }
 
+    /**
+     * @param sampleRate is used to start the decoder with the correct sample rate
+     * @param config can be generated with the utility class ConfigFactory and
+     *               holds configurations for the decoder
+     * @return a new SoniTalkDecoder
+     */
     public SoniTalkDecoder getDecoder(int sampleRate, SoniTalkConfig config) {
         return new SoniTalkDecoder(this, sampleRate, config);
     }
 
-    public SoniTalkDecoder getDecoder(int sampleRate, SoniTalkConfig config, int stepFactor, int frequencyOffsetForSpectrogram, boolean silentMode) {
+    //TODO: If people ask for it, provide a constructor with stepFactor, bandPassFilterOrder, and/or startFactor/endFactor ?
+
+    /**
+     * @param sampleRate is used to start the decoder with the correct sample rate
+     * @param config can be generated with the utility class ConfigFactory and
+     *               holds configurations for the decoder
+     * @param stepFactor
+     * @param frequencyOffsetForSpectrogram
+     * @param silentMode
+     * @return a new SoniTalkDecoder
+     */
+    private SoniTalkDecoder getDecoder(int sampleRate, SoniTalkConfig config, int stepFactor, int frequencyOffsetForSpectrogram, boolean silentMode) {
         return new SoniTalkDecoder(this, sampleRate, config, stepFactor, frequencyOffsetForSpectrogram, silentMode);
     }
 
-    public SoniTalkDecoder getDecoder(int sampleRate, SoniTalkConfig config, int stepFactor, int frequencyOffsetForSpectrogram, boolean silentMode, int bandPassFilterOrder, double startFactor, double endFactor) {
+    /**
+     * @param sampleRate is used to start the decoder with the correct sample rate
+     * @param config can be generated with the utility class ConfigFactory and
+     *               holds configurations for the decoder
+     * @param stepFactor the bigger this factor is, the smaller the step at which we analyze audio
+     *                   to look for start/end messages (meaning more analysis and a better chance
+     *                   to detect a message).
+     * @param frequencyOffsetForSpectrogram 50 is a good default value.
+     * @param silentMode
+     * @param bandPassFilterOrder
+     * @param startFactor value for checking the start block of a message
+     * @param endFactor value for checking the end block of a message
+     * @return a new SoniTalkDecoder
+     */
+    private SoniTalkDecoder getDecoder(int sampleRate, SoniTalkConfig config, int stepFactor, int frequencyOffsetForSpectrogram, boolean silentMode, int bandPassFilterOrder, double startFactor, double endFactor) {
         return new SoniTalkDecoder(this, sampleRate, config, stepFactor, frequencyOffsetForSpectrogram, silentMode, bandPassFilterOrder, startFactor, endFactor);
     }
 
+    /**
+     * @param config can be generated with the utility class ConfigFactory and
+     *               holds configurations for the encoder
+     * @return a new SoniTalkEncoder
+     */
     public SoniTalkEncoder getEncoder(SoniTalkConfig config){
         return new SoniTalkEncoder(this, config);
     }
 
+    /**
+     * @param sampleRate is used to start the encoder with the correct sample rate
+     * @param config can be generated with the utility class ConfigFactory and
+     *               holds configurations for the encoder
+     *
+     * @return a new SoniTalkEncoder
+     */
     public SoniTalkEncoder getEncoder(int sampleRate, SoniTalkConfig config){
         return new SoniTalkEncoder(this, sampleRate, config);
     }
 
+    /**
+     * @return a sender object to transmit the encoded message of the encoder
+     */
     public SoniTalkSender getSender(){
         return new SoniTalkSender(this);
     }
 
+    /**
+     * @param sampleRate is used to get a sender with the correct sample rate
+     * @return a new SoniTalkSender to transmit the encoded message of the encoder
+     */
     public SoniTalkSender getSender(int sampleRate){
         return new SoniTalkSender(this, sampleRate);
     }
