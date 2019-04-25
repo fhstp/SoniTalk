@@ -166,10 +166,12 @@ See the list of [contributors](https://sonitalk.fhstp.ac.at/#team) who participa
 ## License
 * The SoniTalk SDK is licensed under the GNU Lesser General Public License version 3 (LGPL v3) - see the [LGPL.txt](lgpl.txt) file for details.
 * The SoniTalk demonstrator app is licensed under the GNU General Public License version 3 (GPL v3) - see the [GPL.txt](gpl.txt) file for details.
+* This document is distributed under CC-BY-Sharelike-3.0 AT
 
 ## Acknowledgments
 * Project funded by [netidee](https://www.netidee.at/)
 * SoniTalk is a project of the Institute for Creative\Media/Technologies [(IC\M/T)](https://icmt.fhstp.ac.at), developed at Sankt Pölten University of Applied Sciences [(FHSTP)](https://www.fhstp.ac.at/en)
+* Project website: [sonitalk.fhstp.ac.at](https://sonitalk.fhstp.ac.at/)
 
 ## Dependencies and credits
 * [IIRJ](https://github.com/berndporr/iirj), last visited April 2019
