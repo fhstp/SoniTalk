@@ -10,6 +10,9 @@ Unless required by applicable law or agreed to in writing, software distributed 
 
 package at.ac.fhstp.sonitalk.utils;
 
+/**
+ * Generic windowing interface utility to process spectrum.
+ */
 public interface WindowFunction {
 
     /**

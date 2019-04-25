@@ -23,7 +23,6 @@ android {
             /* add the excluded packages */
             exclude "**/R**"
             exclude "**/BuildConfig*"
-            exclude "**/edu**"
 
             ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
             classpath = files(variant.javaCompiler.classpath.files) + files(ext.androidJar)

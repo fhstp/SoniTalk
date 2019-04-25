@@ -20,7 +20,7 @@
 package at.ac.fhstp.sonitalk.utils;
 
 
-public enum SignalType {
+/*package-private*/ enum SignalType {
     /***
      * WARNING: Changing the String values would make the app incompatible with previous version.
      * (The Strings are used to persist values in SharedPreferences)

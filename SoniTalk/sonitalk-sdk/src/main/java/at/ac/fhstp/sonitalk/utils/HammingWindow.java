@@ -10,6 +10,9 @@ Unless required by applicable law or agreed to in writing, software distributed 
 
 package at.ac.fhstp.sonitalk.utils;
 
+/**
+ * Hamming window class utility.
+ */
 public class HammingWindow implements WindowFunction {
 
     private final int windowSize;
