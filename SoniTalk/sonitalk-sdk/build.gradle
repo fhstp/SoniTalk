@@ -31,7 +31,7 @@ android {
             // Will generate UML diagrams from the source code
             options.docletpath = configurations.umlDoclet.files.asType(List)
             options.doclet = "nl.talsmasoftware.umldoclet.UMLDoclet"
-            //options.destinationDirectory = file("C:/Data/SoniTalk/${variant.name.capitalize()}_Javadoc/")
+            options.destinationDirectory = new File("${rootProject.projectDir}", '../docs')
         }
 
         //assemble.dependsOn("generate${variant.name.capitalize()}Javadoc")
