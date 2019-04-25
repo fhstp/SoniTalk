@@ -25,7 +25,7 @@ You will find below a walkthrough of the steps needed to use SoniTalk to exchang
 An instance of the class SoniTalkContext is needed to create SoniTalkEncoder, SoniTalkSender and SoniTalkDecoder objects. On creation you need to pass to the context constructor a ResultReceiver which will receive callbacks from SoniTalk. For more details, please see the Javadoc.
 In onCreate:
 
-```
+```java
   soniTalkPermissionsResultReceiver = new SoniTalkPermissionsResultReceiver(new Handler());
   soniTalkPermissionsResultReceiver.setReceiver(this); // To receive callbacks from the SDK
   soniTalkContext = SoniTalkContext.getInstance(this, soniTalkPermissionsResultReceiver);
@@ -33,20 +33,20 @@ In onCreate:
 
 Then in onStart:
 
-```
+```java
   soniTalkPermissionsResultReceiver.setReceiver(this);
 ```
 
 And in onStop (we would also recommend to stop all Decoders/Senders in order to avoid keeping infinite notifications):
 
-```
+```java
   soniTalkPermissionsResultReceiver.setReceiver(null);
 ```
 
 #### SoniTalkConfig
 A SoniTalkConfig object needs to be created in order to receive or send messages. The configuration should be the same for the Encoder and Decoder apps. The default configuration is in the near ultrasound range and should not be hearable by adults.
 
-```
+```java
 SoniTalkConfig config = ConfigFactory.getDefaultConfig(this.getApplicationContext());
 ```
 
@@ -55,7 +55,7 @@ For more configuration options, please see the Javadoc and specification documen
 #### Receiving messages
 Get a SoniTalkDecoder object, add a listener for the results, and start listening by calling receiveBackground(), you can also specify how long it should record before stopping (i.e. a sort of timeout).
 
-```
+```java
 soniTalkDecoder = soniTalkContext.getDecoder(samplingRate, config);
 soniTalkDecoder.addMessageListener(this); // "this" will be notified of messages received (calls onMessageReceived callback)
 soniTalkDecoder.receiveBackground(RECEIVING_REQUEST_CODE);
@@ -63,7 +63,7 @@ soniTalkDecoder.receiveBackground(RECEIVING_REQUEST_CODE);
 
 Then, when a message is received, onMessageReceived is called (you need to override it):
 
-```
+```java
 @Override
 public void onMessageReceived(final SoniTalkMessage receivedMessage) {
   // Process the message received
@@ -72,19 +72,19 @@ public void onMessageReceived(final SoniTalkMessage receivedMessage) {
 
 If your message was UTF8 text you can use:
 
-```
+```java
 final String textReceived = DecoderUtils.byteToUTF8(receivedMessage.getMessage());
 ```
 
 When you are done with receiving (e.g. in onMessageReceived if(receivedMessage.isCrcCorrect())), please stop the Decoder:
 
-```
+```java
 soniTalkDecoder.stopReceiving();
 ```
 
 You might also want to implement onDecoderError (e.g. in case the microphone is not available), to stop the decoder and notify the user if a problem occur:
 
-```
+```java
 @Override
 public void onDecoderError(final String errorMessage)
 ```
@@ -97,13 +97,13 @@ With the SoniTalkContext an object of SoniTalkEncoder can be created by using th
 ##### Message encoding
 If you are sending UTF8 text, you can transform it with:
 
-```
+```java
 final byte[] bytes = textToSend.getBytes(StandardCharsets.UTF_8);
 ```
 
 And then generate the message from the byte array:
 
-```
+```java
 soniTalkEncoder = soniTalkContext.getEncoder(config);
 soniTalkMessage = soniTalkEncoder.generateMessage(bytes);
 ```
@@ -111,7 +111,7 @@ soniTalkMessage = soniTalkEncoder.generateMessage(bytes);
 ##### Message sending
 Before sending you can use EncoderUtils.isAllowedByteArraySize(bytes, config) to check if your message will fit in one SoniTalkMessage.
 
-```
+```java
 soniTalkSender = soniTalkContext.getSender();
 soniTalkSender.send(currentMessage, SENDING_REQUEST_CODE);
 ```
