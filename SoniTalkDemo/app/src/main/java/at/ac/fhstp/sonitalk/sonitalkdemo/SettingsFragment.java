@@ -73,6 +73,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 if(newValue.toString().trim().equals("")){
                     return false;
                 }
+                if (!newValue.toString().matches("[0-9]+")){
+                    return false;
+                }
                 String prefBitperiodStr = String.format(getString(R.string.settings_bitperiod_text), String.valueOf(newValue));
                 prefBitperiod.setTitle(prefBitperiodStr);
                 setUndefinedPresetName();
@@ -84,6 +87,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         prefPauseperiod.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if(newValue.toString().trim().equals("")){
+                    return false;
+                }
+                if (!newValue.toString().matches("[0-9]+")){
                     return false;
                 }
                 String prefPauseperiodStr = String.format(getString(R.string.settings_pauseperiod_text), String.valueOf(newValue));
@@ -99,6 +105,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 if(newValue.toString().trim().equals("")){
                     return false;
                 }
+                if (!newValue.toString().matches("[0-9]+")){
+                    return false;
+                }
                 String prefFrequencyZeroStr = String.format(getString(R.string.settings_frequency0_text), String.valueOf(newValue));
                 prefFrequencyZero.setTitle(prefFrequencyZeroStr);
                 setUndefinedPresetName();
@@ -110,6 +119,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         prefFrequencyspace.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if(newValue.toString().trim().equals("")){
+                    return false;
+                }
+                if (!newValue.toString().matches("[0-9]+")){
                     return false;
                 }
                 String prefFrequencyspaceStr = String.format(getString(R.string.settings_frequencyspace_text), String.valueOf(newValue));
@@ -125,6 +137,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 if(newValue.toString().trim().equals("")){
                     return false;
                 }
+                if (!newValue.toString().matches("[0-9]+")){
+                    return false;
+                }
                 String prefNMaxCharactersStr = String.format(getString(R.string.settings_maxbytes_text), String.valueOf(newValue));
                 prefNMaxCharacters.setTitle(prefNMaxCharactersStr);
                 setUndefinedPresetName();
@@ -138,6 +153,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 if(newValue.toString().trim().equals("")){
                     return false;
                 }
+                if (!newValue.toString().matches("[0-9]+")){
+                    return false;
+                }
                 String prefNumberOfFrequenciesStr = String.format(getString(R.string.settings_numberoffrequencies_text), String.valueOf(newValue));
                 prefNumberOfFrequencies.setTitle(prefNumberOfFrequenciesStr);
                 setUndefinedPresetName();
@@ -149,6 +167,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         prefLoudness.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if(newValue.toString().trim().equals("")){
+                    return false;
+                }else if (!newValue.toString().matches("[0-9]+")){
                     return false;
                 }else if((int)newValue==0){
                     prefLoudness.setValue(1);
