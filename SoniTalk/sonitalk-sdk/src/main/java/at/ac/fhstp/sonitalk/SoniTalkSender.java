@@ -167,12 +167,12 @@ public class SoniTalkSender {
                 int result = currentAudioTrack.write(message.getRawAudio(), 0, (winLenSamples/*+(winLenSamples/65)*/)); //put the whiteNoise shortarray into the player, buffersize winLenSamples are Shorts here
 
                 soniTalkContext.showNotificationSending();
+                setSenderState(STATE_SENDING);
                 currentAudioTrack.play();
             }
         });
         currentFuture = job;
 
-        setSenderState(STATE_SENDING);
 
         //return job;
     }
