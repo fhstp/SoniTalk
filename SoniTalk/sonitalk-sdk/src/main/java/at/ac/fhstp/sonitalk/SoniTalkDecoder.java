@@ -868,6 +868,7 @@ public class SoniTalkDecoder {
             for(int j = nColsNeighborsLeftRight*(-1); j <= nColsNeighborsLeftRight; j++){
                 if(i!=0 || j!=0){ //[0,0] is done lower
                     values[valuecounter] = data[col+i][row+i];
+                    values[valuecounter] = data[col+j][row+i];
                     valuecounter++;
 
                 }

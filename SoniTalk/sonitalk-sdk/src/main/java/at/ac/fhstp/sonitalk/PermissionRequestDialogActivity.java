@@ -128,7 +128,9 @@ public class PermissionRequestDialogActivity extends AppCompatActivity {
         @Override
         public void onDismiss(DialogInterface dialog) {
             super.onDismiss(dialog);
-            getActivity().finish(); //We do not ask an Android permission, should be fine to finish the activity.
+            FragmentActivity activity = getActivity();
+            if (activity != null)
+                activity.finish(); //We do not ask an Android permission, should be fine to finish the activity.
         }
 
         @Override
