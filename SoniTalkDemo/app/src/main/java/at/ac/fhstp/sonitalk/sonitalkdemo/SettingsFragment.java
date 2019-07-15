@@ -20,13 +20,18 @@
 package at.ac.fhstp.sonitalk.sonitalkdemo;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.preference.SeekBarPreference;
-import android.support.v7.preference.*;
+import android.preference.PreferenceFragment;
+import android.preference.*;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.widget.Button;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -34,7 +39,7 @@ import at.ac.fhstp.sonitalk.SoniTalkConfig;
 import at.ac.fhstp.sonitalk.exceptions.ConfigException;
 import at.ac.fhstp.sonitalk.utils.ConfigFactory;
 
-public class SettingsFragment extends PreferenceFragmentCompat {
+public class SettingsFragment extends PreferenceFragment {
 
     private EditTextPreference etFrequencyZero;
     private EditTextPreference etBitperiod;
@@ -42,14 +47,10 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     private EditTextPreference etFrequencyspace;
     private EditTextPreference etNMaxCharacters;
     private ListPreference lpNumberOfFrequencies;
-    private SeekBarPreference sbprefLoudness;
+    private EditTextPreference sbprefLoudness;
     private Preference prefPresets;
 
     AlertDialog alertReset = null;
-
-    public SettingsFragment(){
-
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,18 +63,34 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         etFrequencyspace = (EditTextPreference) findPreference(ConfigConstants.SPACE_BETWEEN_FREQUENCIES);
         etNMaxCharacters = (EditTextPreference) findPreference(ConfigConstants.NUMBER_OF_BYTES);
         lpNumberOfFrequencies = (ListPreference) findPreference(ConfigConstants.NUMBER_OF_FREQUENCIES);
-        sbprefLoudness = (SeekBarPreference) findPreference(ConfigConstants.LOUDNESS);
+        sbprefLoudness = (EditTextPreference) findPreference(ConfigConstants.LOUDNESS);
         prefPresets  = findPreference(ConfigConstants.PREFERENCE_PRESET_PREFERENCES);
 
         setPreferenceValues();
 
-        final Preference prefBitperiod = findPreference(ConfigConstants.BIT_PERIOD);
+        final EditTextPreference prefBitperiod = (EditTextPreference)findPreference(ConfigConstants.BIT_PERIOD);
+        prefBitperiod.setOnPreferenceClickListener(new EditTextPreference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                return onEditTextPreferenceClick(prefBitperiod, R.string.settings_bitperiod_text, ConfigConstants.SETTING_BIT_PERIOD_LOWER_LIMIT, ConfigConstants.SETTING_BIT_PERIOD_UPPER_LIMIT);
+            }
+        });
         prefBitperiod.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if(newValue.toString().trim().equals("")){
+                    showToastNoCharactersEntered();
                     return false;
                 }
                 if (!newValue.toString().matches("[0-9]+")){
+                    showToastNoNumericCharacterEntered();
+                    return false;
+                }
+                if (Integer.valueOf(newValue.toString())<ConfigConstants.SETTING_BIT_PERIOD_LOWER_LIMIT){
+                    showToastLowerLimitExceeded(ConfigConstants.SETTING_BIT_PERIOD_LOWER_LIMIT);
+                    return false;
+                }
+                if (Integer.valueOf(newValue.toString())> ConfigConstants.SETTING_BIT_PERIOD_UPPER_LIMIT){
+                    showToastUpperLimitExceeded( ConfigConstants.SETTING_BIT_PERIOD_UPPER_LIMIT);
                     return false;
                 }
                 String prefBitperiodStr = String.format(getString(R.string.settings_bitperiod_text), String.valueOf(newValue));
@@ -83,13 +100,29 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             }
         });
 
-        final Preference prefPauseperiod = findPreference(ConfigConstants.PAUSE_PERIOD);
+        final EditTextPreference prefPauseperiod = (EditTextPreference)findPreference(ConfigConstants.PAUSE_PERIOD);
+        prefPauseperiod.setOnPreferenceClickListener(new EditTextPreference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                return onEditTextPreferenceClick(prefPauseperiod, R.string.settings_pauseperiod_text, ConfigConstants.SETTING_PAUSE_PERIOD_LOWER_LIMIT, ConfigConstants.SETTING_PAUSE_PERIOD_UPPER_LIMIT);
+            }
+        });
         prefPauseperiod.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if(newValue.toString().trim().equals("")){
+                    showToastNoCharactersEntered();
                     return false;
                 }
                 if (!newValue.toString().matches("[0-9]+")){
+                    showToastNoNumericCharacterEntered();
+                    return false;
+                }
+                if (Integer.valueOf(newValue.toString())< ConfigConstants.SETTING_PAUSE_PERIOD_LOWER_LIMIT){
+                    showToastLowerLimitExceeded( ConfigConstants.SETTING_PAUSE_PERIOD_LOWER_LIMIT);
+                    return false;
+                }
+                if (Integer.valueOf(newValue.toString())>ConfigConstants.SETTING_PAUSE_PERIOD_UPPER_LIMIT){
+                    showToastUpperLimitExceeded(ConfigConstants.SETTING_PAUSE_PERIOD_UPPER_LIMIT);
                     return false;
                 }
                 String prefPauseperiodStr = String.format(getString(R.string.settings_pauseperiod_text), String.valueOf(newValue));
@@ -99,13 +132,29 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             }
         });
 
-        final Preference prefFrequencyZero = findPreference(ConfigConstants.FREQUENCY_ZERO);
+        final EditTextPreference prefFrequencyZero = (EditTextPreference)findPreference(ConfigConstants.FREQUENCY_ZERO);
+        prefFrequencyZero.setOnPreferenceClickListener(new EditTextPreference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                return onEditTextPreferenceClick(prefFrequencyZero, R.string.settings_frequency0_text, ConfigConstants.SETTING_FREQUENCY_ZERO_LOWER_LIMIT, ConfigConstants.SETTING_FREQUENCY_ZERO_UPPER_LIMIT);
+            }
+        });
         prefFrequencyZero.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if(newValue.toString().trim().equals("")){
+                    showToastNoCharactersEntered();
                     return false;
                 }
                 if (!newValue.toString().matches("[0-9]+")){
+                    showToastNoNumericCharacterEntered();
+                    return false;
+                }
+                if (Integer.valueOf(newValue.toString())<ConfigConstants.SETTING_FREQUENCY_ZERO_LOWER_LIMIT) {
+                    showToastLowerLimitExceeded(ConfigConstants.SETTING_FREQUENCY_ZERO_LOWER_LIMIT);
+                    return false;
+                }
+                if (Integer.valueOf(newValue.toString())>ConfigConstants.SETTING_FREQUENCY_ZERO_UPPER_LIMIT) {
+                    showToastUpperLimitExceeded(ConfigConstants.SETTING_FREQUENCY_ZERO_UPPER_LIMIT);
                     return false;
                 }
                 String prefFrequencyZeroStr = String.format(getString(R.string.settings_frequency0_text), String.valueOf(newValue));
@@ -115,13 +164,29 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             }
         });
 
-        final Preference prefFrequencyspace = findPreference(ConfigConstants.SPACE_BETWEEN_FREQUENCIES);
+        final EditTextPreference prefFrequencyspace = (EditTextPreference)findPreference(ConfigConstants.SPACE_BETWEEN_FREQUENCIES);
+        prefFrequencyspace.setOnPreferenceClickListener(new EditTextPreference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                return onEditTextPreferenceClick(prefFrequencyspace, R.string.settings_frequencyspace_text, ConfigConstants.SETTING_SPACE_BETWEEN_FREQUENCIES_LOWER_LIMIT, ConfigConstants.SETTING_SPACE_BETWEEN_FREQUENCIES_UPPER_LIMIT);
+            }
+        });
         prefFrequencyspace.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if(newValue.toString().trim().equals("")){
+                    showToastNoCharactersEntered();
                     return false;
                 }
                 if (!newValue.toString().matches("[0-9]+")){
+                    showToastNoNumericCharacterEntered();
+                    return false;
+                }
+                if (Integer.valueOf(newValue.toString())<ConfigConstants.SETTING_SPACE_BETWEEN_FREQUENCIES_LOWER_LIMIT) {
+                    showToastLowerLimitExceeded(ConfigConstants.SETTING_SPACE_BETWEEN_FREQUENCIES_LOWER_LIMIT);
+                    return false;
+                }
+                if (Integer.valueOf(newValue.toString())>ConfigConstants.SETTING_SPACE_BETWEEN_FREQUENCIES_UPPER_LIMIT) {
+                    showToastUpperLimitExceeded(ConfigConstants.SETTING_SPACE_BETWEEN_FREQUENCIES_UPPER_LIMIT);
                     return false;
                 }
                 String prefFrequencyspaceStr = String.format(getString(R.string.settings_frequencyspace_text), String.valueOf(newValue));
@@ -131,13 +196,29 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             }
         });
 
-        final Preference prefNMaxCharacters = findPreference(ConfigConstants.NUMBER_OF_BYTES);
+        final EditTextPreference prefNMaxCharacters = (EditTextPreference)findPreference(ConfigConstants.NUMBER_OF_BYTES);
+        prefNMaxCharacters.setOnPreferenceClickListener(new EditTextPreference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                return onEditTextPreferenceClick(prefNMaxCharacters, R.string.settings_maxbytes_text, ConfigConstants.SETTING_NUMBER_OF_BYTES_LOWER_LIMIT, ConfigConstants.SETTING_NUMBER_OF_BYTES_UPPER_LIMIT);
+            }
+        });
         prefNMaxCharacters.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if(newValue.toString().trim().equals("")){
+                    showToastNoCharactersEntered();
                     return false;
                 }
                 if (!newValue.toString().matches("[0-9]+")){
+                    showToastNoNumericCharacterEntered();
+                    return false;
+                }
+                if (newValue.toString().length()<ConfigConstants.SETTING_NUMBER_OF_BYTES_LOWER_LIMIT){
+                    showToastLowerLimitExceeded(ConfigConstants.SETTING_NUMBER_OF_BYTES_LOWER_LIMIT);
+                    return false;
+                }
+                if (newValue.toString().length()>ConfigConstants.SETTING_NUMBER_OF_BYTES_UPPER_LIMIT){
+                    showToastUpperLimitExceeded(ConfigConstants.SETTING_NUMBER_OF_BYTES_UPPER_LIMIT);
                     return false;
                 }
                 String prefNMaxCharactersStr = String.format(getString(R.string.settings_maxbytes_text), String.valueOf(newValue));
@@ -148,12 +229,24 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         });
 
         final Preference prefNumberOfFrequencies = findPreference(ConfigConstants.NUMBER_OF_FREQUENCIES);
+        prefNumberOfFrequencies.setOnPreferenceClickListener(new EditTextPreference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                ListPreference prefEdit = (ListPreference) preference;
+                Dialog prefDialog = prefEdit.getDialog();
+                String prefBitperiodStr = getString(R.string.settings_numberoffrequencies_text_dialog);
+                prefDialog.setTitle(prefBitperiodStr);
+                return true;
+            }
+        });
         prefNumberOfFrequencies.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if(newValue.toString().trim().equals("")){
+                    showToastNoCharactersEntered();
                     return false;
                 }
                 if (!newValue.toString().matches("[0-9]+")){
+                    showToastNoNumericCharacterEntered();
                     return false;
                 }
                 String prefNumberOfFrequenciesStr = String.format(getString(R.string.settings_numberoffrequencies_text), String.valueOf(newValue));
@@ -163,16 +256,32 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             }
         });
 
-        final SeekBarPreference prefLoudness = (SeekBarPreference) findPreference(ConfigConstants.LOUDNESS);
+        final EditTextPreference prefLoudness = (EditTextPreference) findPreference(ConfigConstants.LOUDNESS);
+        prefLoudness.setOnPreferenceClickListener(new EditTextPreference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                return onEditTextPreferenceClick(prefLoudness, R.string.settings_loudness_text, ConfigConstants.SETTING_LOUDNESS_LOWER_LIMIT, ConfigConstants.SETTING_LOUDNESS_UPPER_LIMIT);
+            }
+        });
         prefLoudness.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if(newValue.toString().trim().equals("")){
+                    showToastNoCharactersEntered();
                     return false;
                 }else if (!newValue.toString().matches("[0-9]+")){
+                    showToastNoNumericCharacterEntered();
                     return false;
-                }else if((int)newValue==0){
-                    prefLoudness.setValue(1);
+                }else if(Integer.valueOf(newValue.toString())==ConfigConstants.SETTING_LOUDNESS_LOWER_LIMIT){
+                    showToastLowerLimitExceeded(ConfigConstants.SETTING_LOUDNESS_LOWER_LIMIT);
+                    return false;
                 }
+                if(Integer.valueOf(newValue.toString())>ConfigConstants.SETTING_LOUDNESS_UPPER_LIMIT){
+                    showToastUpperLimitExceeded(ConfigConstants.SETTING_LOUDNESS_UPPER_LIMIT);
+                    return false;
+                }
+                String prefLoudnessStr = String.format(getString(R.string.settings_loudness_text), String.valueOf(newValue));
+                prefLoudness.setTitle(prefLoudnessStr);
+                setUndefinedPresetName();
                 return true;
             }
         });
@@ -241,10 +350,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         });
     }
 
-    @Override
-    public void onCreatePreferences(Bundle bundle, String s) {
-
-    }
 
     /*private String[] getRawList(Context context){
         String[] list = null;
@@ -276,7 +381,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         editor.putString(ConfigConstants.PAUSE_PERIOD, String.valueOf(config.getPauseperiod()));
         editor.putString(ConfigConstants.SPACE_BETWEEN_FREQUENCIES, String.valueOf(config.getFrequencySpace()));
         editor.putString(ConfigConstants.NUMBER_OF_BYTES, String.valueOf((config.getnMessageBlocks()*2-2)));
-        editor.putInt(ConfigConstants.LOUDNESS, ConfigConstants.SETTING_LOUDNESS_DEFAULT);
+        editor.putString(ConfigConstants.LOUDNESS, ConfigConstants.SETTING_LOUDNESS_DEFAULT);
         editor.putString(ConfigConstants.PRESET, String.valueOf("default_config.json"));
 
         /*editor.putString(ConfigConstants.FREQUENCY_ZERO, ConfigConstants.SETTING_FREQUENCY_ZERO_DEFAULT);
@@ -329,8 +434,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         lpNumberOfFrequencies.setTitle(prefNumberOfFrequencies);
         lpNumberOfFrequencies.setValueIndex(checkFrequencyListViewIndex(numberOfFrequencies));
 
-        int loudness = sp.getInt(sbprefLoudness.getKey(), ConfigConstants.SETTING_LOUDNESS_DEFAULT);
-        sbprefLoudness.setValue(loudness);
+        String loudness = sp.getString(sbprefLoudness.getKey(), ConfigConstants.SETTING_LOUDNESS_DEFAULT);
+        String prefloudness = String.format(getString(R.string.settings_loudness_text), String.valueOf(loudness));
+        sbprefLoudness.setTitle(prefloudness);//setValue(loudness);
 
         String presets = sp.getString(prefPresets.getKey(), getString(R.string.preset_undefined));
         String prPresets = String.format(getString(R.string.settings_preset_title), String.valueOf(presets));
@@ -358,7 +464,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         editor.putString(ConfigConstants.PAUSE_PERIOD, String.valueOf(config.getPauseperiod()));
         editor.putString(ConfigConstants.SPACE_BETWEEN_FREQUENCIES, String.valueOf(config.getFrequencySpace()));
         editor.putString(ConfigConstants.NUMBER_OF_BYTES, String.valueOf((config.getnMessageBlocks()*2-2)));
-        editor.putInt(ConfigConstants.LOUDNESS, ConfigConstants.SETTING_LOUDNESS_DEFAULT);
+        editor.putString(ConfigConstants.LOUDNESS, ConfigConstants.SETTING_LOUDNESS_DEFAULT);
         editor.putString(ConfigConstants.PRESET, configName);
 
         editor.apply();
@@ -397,5 +503,64 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         editor.commit();
         String prPresets = String.format(getString(R.string.settings_preset_title), getString(R.string.preset_undefined));
         prefPresets.setTitle(prPresets);
+    }
+
+    public void showToastNoCharactersEntered(){
+        Toast.makeText(getContext(), getString(R.string.show_toast_no_characters_entered), Toast.LENGTH_SHORT).show();
+    }
+
+    public void showToastNoNumericCharacterEntered(){
+        Toast.makeText(getContext(), getString(R.string.show_toast_no_numeric_character_entered), Toast.LENGTH_SHORT).show();
+    }
+
+    public void showToastLowerLimitExceeded(int limit){
+        Toast.makeText(getContext(), String.format(getString(R.string.show_toast_lower_limit_exceeded), limit), Toast.LENGTH_SHORT).show();
+    }
+
+    public void showToastUpperLimitExceeded(int limit){
+        Toast.makeText(getContext(), String.format(getString(R.string.show_toast_higher_limit_exceeded), limit), Toast.LENGTH_SHORT).show();
+    }
+
+    private boolean onEditTextPreferenceClick(final EditTextPreference editTextPreference, int settingsText, final int settingLowerLimit, final int settingUpperLimit) {
+        EditTextPreference prefEdit = editTextPreference;
+        Dialog prefDialog = prefEdit.getDialog();
+        String prefBitperiodStr = String.format(getString(settingsText), String.valueOf(prefEdit.getText()));
+        prefDialog.setTitle(prefBitperiodStr + " ["+settingLowerLimit+";"+settingUpperLimit+"]");
+        editTextPreference.getEditText().setTextColor(Color.BLACK);
+        prefDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_UP) {
+                    String text = editTextPreference.getEditText().getText().toString();
+                    if (!"".equals(text) && (Integer.valueOf(text) < settingLowerLimit || Integer.valueOf(text) > settingUpperLimit)) {
+                        if (dialog instanceof AlertDialog) {
+                            AlertDialog alertDlg = (AlertDialog) dialog;
+                            Button btn = alertDlg.getButton(AlertDialog.BUTTON_POSITIVE);
+                            btn.setEnabled(false);
+                            editTextPreference.getEditText().setTextColor(Color.RED);
+                        }
+                        return false;
+                    } else if("".equals(text)){
+                        if (dialog instanceof AlertDialog) {
+                            AlertDialog alertDlg = (AlertDialog) dialog;
+                            Button btn = alertDlg.getButton(AlertDialog.BUTTON_POSITIVE);
+                            btn.setEnabled(false);
+                            editTextPreference.getEditText().setTextColor(Color.RED);
+                        }
+                        return false;
+                    }else{
+                        if (dialog instanceof AlertDialog) {
+                            AlertDialog alertDlg = (AlertDialog) dialog;
+                            Button btn = alertDlg.getButton(AlertDialog.BUTTON_POSITIVE);
+                            btn.setEnabled(true);
+                            editTextPreference.getEditText().setTextColor(Color.BLACK);
+                        }
+                        return false;
+                    }
+                }
+                return false;
+            }
+        });
+        return true;
     }
 }
