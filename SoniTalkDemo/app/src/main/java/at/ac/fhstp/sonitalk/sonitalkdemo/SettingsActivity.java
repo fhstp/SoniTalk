@@ -20,7 +20,6 @@
 package at.ac.fhstp.sonitalk.sonitalkdemo;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 public class SettingsActivity extends BaseActivity {
 
@@ -30,7 +29,7 @@ public class SettingsActivity extends BaseActivity {
         setContentView(R.layout.settings_container);
 
         // Display the fragment as the main content.
-        getSupportFragmentManager().beginTransaction()
+        getFragmentManager().beginTransaction()
                 .replace(R.id.preference_container, new SettingsFragment()) //replace the layout file with the settingsFragment
                 .commit();
     }

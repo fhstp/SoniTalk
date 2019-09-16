@@ -61,7 +61,8 @@
     <string name="settings_frequencyspace_text">Frequency space (%s Hz)</string>
     <string name="settings_maxbytes_text">Maximum message length (%s bytes)</string>
     <string name="settings_numberoffrequencies_text">Number of frequencies (%s)</string>
-    <string name="settings_loudness_text">Volume</string>
+    <string name="settings_numberoffrequencies_text_dialog">Number of frequencies</string>
+    <string name="settings_loudness_text">Volume (%s)</string>
     <string name="settings_reset_title">Reset settings</string>
     <string name="settings_preset_title">Preset (%s)</string>
     <string name="gui_message_title">Preset configuration (%s)</string>
@@ -92,4 +93,8 @@
 \n\nThe SoniTalk Demo app needs access to the microphone for receiving messages and the custom data-over-sound permission to send and receive messages.
 \n\nWe do not transmit any data from your phone (apart from the text you decide to send) and do not store any privacy-sensitive data.</string>
     <string name="creditsText">Credits \n\n Iirj (https://github.com/berndporr/iirj/)\n\n JTransforms, Utilities (https://mvnrepository.com/artifact/edu.emory.mathcs/)\n\n MaryTTS (https://github.com/marytts/marytts/)\n\nHamming Window by Benjamin Elliott (https://github.com/benelliott/spectrogram-android)\n\nMaterial Icons and the Apache Commons Library are used, which are under the license of Apache License Version 2.0 (https://www.apache.org/licenses/LICENSE-2.0.txt )</string>
+    <string name="show_toast_no_characters_entered">Please enter a value!</string>
+    <string name="show_toast_no_numeric_character_entered">Please enter only numeric values!</string>
+    <string name="show_toast_lower_limit_exceeded">Please enter a value above the limit of %d!</string>
+    <string name="show_toast_higher_limit_exceeded">Please enter a value below the limit of %d!</string>
 </resources>

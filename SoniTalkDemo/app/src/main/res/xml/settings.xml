@@ -18,53 +18,52 @@
   ~ along with SoniTalk Demo app.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="Settings">
 
-        <android.support.v7.preference.EditTextPreference
+        <EditTextPreference
             android:defaultValue="18000"
+            android:inputType="number"
             android:key="etprefFrequencyZero"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:inputType="number"
             android:title="@string/settings_frequency0_text" />
-        <android.support.v7.preference.EditTextPreference
+        <EditTextPreference
             android:defaultValue="100"
             android:key="etprefBitperiod"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:inputType="number"
             android:title="@string/settings_bitperiod_text" />
-        <android.support.v7.preference.EditTextPreference
+        <EditTextPreference
             android:defaultValue="0"
             android:key="etprefPauseperiod"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:inputType="number"
             android:title="@string/settings_pauseperiod_text" />
-        <android.support.v7.preference.EditTextPreference
+        <EditTextPreference
             android:defaultValue="100"
             android:key="etprefFrequencyspace"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:inputType="number"
             android:title="@string/settings_frequencyspace_text" />
-        <android.support.v7.preference.EditTextPreference
+        <EditTextPreference
             android:defaultValue="18"
             android:key="etprefNMaxBytes"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:inputType="number"
             android:title="@string/settings_maxbytes_text" />
-        <android.support.v7.preference.ListPreference
+        <ListPreference
             android:key="lpprefNFrequencies"
             android:title="@string/settings_numberoffrequencies_text"
             android:entries="@array/numberOfFrequenciesVisible"
             android:entryValues="@array/numberOfFrequencies" />
-        <android.support.v7.preference.SeekBarPreference
+        <EditTextPreference
             android:key="sbprefLoudness"
             android:title="@string/settings_loudness_text"
-            android:max="100"
             android:defaultValue="70"
             android:inputType="number"/>
         <Preference
@@ -74,4 +73,4 @@
             android:key="resetPreferences"
             android:title="@string/settings_reset_title"></Preference>
     </PreferenceCategory>
-</android.support.v7.preference.PreferenceScreen>
+</PreferenceScreen>

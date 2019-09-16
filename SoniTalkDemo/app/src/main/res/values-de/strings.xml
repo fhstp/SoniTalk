@@ -21,8 +21,6 @@
 <resources>
     <string name="permission_request_explanation_negative">Nein danke</string>
     <string name="action_reset_settings_title">Einstellungen zurücksetzen</string>
-    <string name="settings_numberoffrequencies_text">Anzahl Frequenzen (%s)</string>
-    <string name="settings_reset_title">Einstellungen zurücksetzen</string>
     <string name="permissionRequestExplanation">Für den Empfang von Nachrichten über Sound ist das Mikrofon erforderlich.</string>
     <string name="l0permissionRequestExplanation">Für die Kommunikation ist die \"Data-over-sound\"-Berechtigung erforderlich.</string>
     <string name="action_reset_settings_message">Möchten Sie alle Einstellungen zurücksetzen?</string>
@@ -50,9 +48,12 @@
     <string name="settings_bitperiod_text">Dauer eines Bits (%s ms)</string>
     <string name="settings_pauseperiod_text">Dauer einer Pause (%s ms)</string>
     <string name="settings_frequency0_text">Basisfrequenz (%s Hz)</string>
-    <string name="settings_frequencyspace_text">Frequenzabstand (%s Hs)</string>
+    <string name="settings_frequencyspace_text">Frequenzabstand (%s Hz)</string>
     <string name="settings_maxbytes_text">Maximale Nachrichtenlänge (%s Bytes)</string>
-    <string name="settings_loudness_text">Lautstärke</string>
+    <string name="settings_numberoffrequencies_text_dialog">Anzahl an Frequenzen</string>
+    <string name="settings_numberoffrequencies_text">Anzahl an Frequenzen (%s)</string>
+    <string name="settings_reset_title">Einstellungen zurücksetzen</string>
+    <string name="settings_loudness_text">Lautstärke (%s)</string>
     <string name="settings_preset_title">Voreingestellte Konfiguration (%s)</string>
     <string name="preset_undefined">undefiniert</string>
     <string name="gui_message_title">Voreingestellte Konfiguration (%s)</string>
@@ -75,4 +76,8 @@
 \n\nDie SoniTalk Demo App benötigt Zugriff auf das Mikrofon zum Empfangen von Nachrichten und die "Data-over-sound"-Berechtigung zum Senden und Empfangen von Nachrichten.
 \n\nWir übertragen keine Daten von Ihrem Mobiltelefon und speichern keine datenschutzrelevanten Daten.</string>
     <string name="creditsText">Credits \n\n Iirj (https://github.com/berndporr/iirj/)\n\n JTransforms, Utilities (https://mvnrepository.com/artifact/edu.emory.mathcs/)\n\n MaryTTS (https://github.com/marytts/marytts/)\n\nHamming Window by Benjamin Elliott (https://github.com/benelliott/spectrogram-android)\n\nMaterial Icons und die Apache Commons Library wurden verwendet. Diese stehen unter der Lizenz "Apache License Version 2.0"(https://www.apache.org/licenses/LICENSE-2.0.txt )</string>
+    <string name="show_toast_no_characters_entered">Bitte geben Sie einen Wert ein!</string>
+    <string name="show_toast_no_numeric_character_entered">Bitte geben Sie nur numerische Werte ein!</string>
+    <string name="show_toast_lower_limit_exceeded">Bitte geben sie einen Wert über dem Limit von %d ein!</string>
+    <string name="show_toast_higher_limit_exceeded">Bitte geben sie einen Wert unter dem Limit von %d ein!</string>
 </resources>

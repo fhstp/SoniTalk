@@ -216,7 +216,7 @@ public class MainActivity extends BaseActivity implements SoniTalkDecoder.Messag
             ed.putInt(ConfigConstants.CURRENT_VOLUME, currentVolume);
             ed.apply();
 
-            int volume = sp.getInt(ConfigConstants.LOUDNESS, ConfigConstants.SETTING_LOUDNESS_DEFAULT);
+            int volume = Integer.valueOf(sp.getString(ConfigConstants.LOUDNESS, ConfigConstants.SETTING_LOUDNESS_DEFAULT));
             audioManager.setStreamVolume(3, (int) Math.round((audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC) * volume/100.0D)), 0);
 
             if (soniTalkContext == null) {

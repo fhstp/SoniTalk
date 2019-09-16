@@ -167,7 +167,7 @@ public class SoniTalkDecoder {
 
     /*package private*/SoniTalkDecoder(SoniTalkContext soniTalkContext, int sampleRate, SoniTalkConfig config, int stepFactor, int frequencyOffsetForSpectrogram, boolean silentMode, int bandPassFilterOrder, double startFactor, double endFactor) {
         this.soniTalkContext = soniTalkContext;
-
+//TODO: check if f0 is higher than frequency offset.
         this.Fs = sampleRate;
         this.config = config;
         this.crc = new CRC();
@@ -710,8 +710,8 @@ public class SoniTalkDecoder {
 
         int lowerCutoffFrequency = frequencies[0]-frequencyOffsetForSpectrogram;
         int upperCutoffFrequency = frequencies[frequencies.length-1]+frequencyOffsetForSpectrogram;
-        int lowerCutoffFrequencyIdx = (int)((float)lowerCutoffFrequency/(float)Fs*(float)winLenForSpectrogramInSamples) + 1;
-        int upperCutoffFrequencyIdx = (int)((float)upperCutoffFrequency/(float)Fs*(float)winLenForSpectrogramInSamples) + 1;
+        int lowerCutoffFrequencyIdx = (int)((float)lowerCutoffFrequency/(float)Fs*(float)winLenForSpectrogramInSamples);// + 1;
+        int upperCutoffFrequencyIdx = (int)((float)upperCutoffFrequency/(float)Fs*(float)winLenForSpectrogramInSamples);// + 1;
 
 
         // Check if the normalization on a column instead on all the whole message really improved the detection.
@@ -867,7 +867,6 @@ public class SoniTalkDecoder {
         for(int i = nRowsNeighborsLeftRight*(-1); i <= nRowsNeighborsLeftRight; i++){
             for(int j = nColsNeighborsLeftRight*(-1); j <= nColsNeighborsLeftRight; j++){
                 if(i!=0 || j!=0){ //[0,0] is done lower
-                    values[valuecounter] = data[col+i][row+i];
                     values[valuecounter] = data[col+j][row+i];
                     valuecounter++;
 
