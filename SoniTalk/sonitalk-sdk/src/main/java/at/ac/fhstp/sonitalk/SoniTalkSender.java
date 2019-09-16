@@ -57,7 +57,7 @@ public class SoniTalkSender {
 
     private int senderState = STATE_IDLE;
     private int Fs;
-    //private SoniTalkMessage currentMessage;
+    private SoniTalkMessage currentMessage;
     private AudioTrack currentAudioTrack;
     private Future<?> currentFuture;
     private int maxRunCount = -1;
@@ -108,6 +108,11 @@ public class SoniTalkSender {
             throw new IllegalStateException("send() called on SoniTalkSender already sending.");
         }
 
+        if (currentMessage != null && !currentMessage.equals(message)) {// if SoniTalkMessage is new, release the old audiotrack
+            //Log.d("SoniTalkSender", "currentAudioTrack release");
+            releaseSenderResources();
+        }
+        //else sender is reused
         Future job = executorService.submit(new Runnable() {
             @Override
             public void run() {
@@ -123,7 +128,11 @@ public class SoniTalkSender {
                 if(winLenSamples%2 == 1){
                     winLenSamples+=1; //if the windowSamples are odd, we have to add 1 sample because audiotrack later needs an even buffersize
                 }
-                currentAudioTrack = new AudioTrack(AudioManager.STREAM_MUSIC, Fs, AudioFormat.CHANNEL_OUT_MONO, AudioFormat.ENCODING_PCM_16BIT,(winLenSamples/*+(winLenSamples/65)*/)*2,AudioTrack.MODE_STATIC); //creating the audiotrack player with winLenSamples*2 as the buffersize because the constructor wants bytes
+                // If we have a new message, we create an AudioTrack
+                if (currentMessage == null || !currentMessage.equals(message)) {
+                    currentAudioTrack = new AudioTrack(AudioManager.STREAM_MUSIC, Fs, AudioFormat.CHANNEL_OUT_MONO, AudioFormat.ENCODING_PCM_16BIT, (winLenSamples/*+(winLenSamples/65)*/) * 2, AudioTrack.MODE_STATIC); //creating the audiotrack player with winLenSamples*2 as the buffersize because the constructor wants bytes
+                }
+                currentMessage = message;
 
                 currentAudioTrack.setNotificationMarkerPosition(winLenSamples);
 
@@ -235,5 +244,17 @@ public class SoniTalkSender {
 
     private synchronized void setSenderState(@SenderState int senderState) {
         this.senderState = senderState;
+    }
+
+    /**
+     * Release the AudioTrack object. This method should be called when you are done with the SoniTalkSender, e.g. in onStop().
+     */
+    public void releaseSenderResources() {
+        cancel();
+        if (currentAudioTrack != null){
+            currentAudioTrack.release();
+            currentAudioTrack = null;
+            currentMessage = null;
+        }
     }
 }

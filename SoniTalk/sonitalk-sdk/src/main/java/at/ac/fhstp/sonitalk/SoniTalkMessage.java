@@ -19,6 +19,8 @@
 
 package at.ac.fhstp.sonitalk;
 
+import java.util.Arrays;
+
 /**
  * Wrapper class for messages (received or to be sent).
  * crcIsCorrect, decodingTimeNanosecond are mostly used for debugging purpose and should not be
@@ -106,5 +108,18 @@ public class SoniTalkMessage {
      */
     /*package-private*/void setRawAudio(short[] rawAudio) {
         this.rawAudio = rawAudio;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SoniTalkMessage that = (SoniTalkMessage) o;
+        return Arrays.equals(message, that.message);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(message);
     }
 }

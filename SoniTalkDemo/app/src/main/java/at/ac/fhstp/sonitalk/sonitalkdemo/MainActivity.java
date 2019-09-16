@@ -197,6 +197,14 @@ public class MainActivity extends BaseActivity implements SoniTalkDecoder.Messag
         btnPlay.setImageResource(R.drawable.ic_volume_up_grey_48dp);
     }
 
+    public void releaseSender() {
+        if(soniTalkSender != null) {
+            soniTalkSender.releaseSenderResources();
+        }
+        saveButtonState(ConfigConstants.SEND_BUTTON_ENABLED,true);
+        btnPlay.setImageResource(R.drawable.ic_volume_up_grey_48dp);
+    }
+
     public void sendMessage(){
         //Log.d("PlayClick","I got clicked");
 
@@ -214,7 +222,9 @@ public class MainActivity extends BaseActivity implements SoniTalkDecoder.Messag
             if (soniTalkContext == null) {
                 soniTalkContext = SoniTalkContext.getInstance(MainActivity.this, soniTalkPermissionsResultReceiver);
             }
-            soniTalkSender = soniTalkContext.getSender();
+            if (soniTalkSender == null) {
+                soniTalkSender = soniTalkContext.getSender();
+            }
             soniTalkSender.send(currentMessage, ON_SENDING_REQUEST_CODE);
 
         } else{
@@ -329,7 +339,7 @@ public class MainActivity extends BaseActivity implements SoniTalkDecoder.Messag
     protected void onStop() {
         super.onStop();
         stopDecoder();
-        stopSending();
+        releaseSender();
         setReceivedText("");
 
         if (currentToast != null) {
