@@ -68,6 +68,7 @@ import at.ac.fhstp.sonitalk.utils.DecoderUtils;
 import at.ac.fhstp.sonitalk.utils.EncoderUtils;
 
 import static android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS;
+import static at.ac.fhstp.sonitalk.utils.EncoderUtils.calculateNumberOfMessageBlocks;
 
 
 public class MainActivity extends BaseActivity implements SoniTalkDecoder.MessageListener, SoniTalkPermissionsResultReceiver.Receiver {
@@ -252,7 +253,7 @@ public class MainActivity extends BaseActivity implements SoniTalkDecoder.Messag
         int frequencySpace = Integer.valueOf(sp.getString(ConfigConstants.SPACE_BETWEEN_FREQUENCIES, ConfigConstants.SETTING_SPACE_BETWEEN_FREQUENCIES_DEFAULT));
         int nMaxBytes = Integer.valueOf(sp.getString(ConfigConstants.NUMBER_OF_BYTES, ConfigConstants.SETTING_NUMBER_OF_BYTES_DEFAULT));
 
-        int nMessageBlocks = (nMaxBytes+2) / 2; // We want 10 message blocks by default
+        int nMessageBlocks = calculateNumberOfMessageBlocks(nFrequencies, nMaxBytes); // We want 10 message blocks by default
         SoniTalkConfig config = new SoniTalkConfig(f0, bitperiod, pauseperiod, nMessageBlocks, nFrequencies, frequencySpace);
         if (soniTalkContext == null) {
             soniTalkContext = SoniTalkContext.getInstance(MainActivity.this, soniTalkPermissionsResultReceiver);

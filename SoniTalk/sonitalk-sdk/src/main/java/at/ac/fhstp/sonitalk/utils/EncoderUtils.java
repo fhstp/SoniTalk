@@ -96,12 +96,21 @@ public class EncoderUtils {
      * @return boolean depending on the number of bytes
      */
     public static boolean isAllowedByteArraySize(byte[] textToSend, SoniTalkConfig config){
-        int maxChars =  config.getnMessageBlocks()*(config.getnFrequencies()/8)-2;
+        int maxChars = getMaxChars(config.getnMessageBlocks(), config.getnFrequencies());
         if(changeToBitString(textToSend).length()<=(maxChars*8)) {
             return true;
         }else{
             return false;
         }
+    }
+
+    public static int getMaxChars(int nMessageBlock, int nFrequencies) {
+        return nMessageBlock*(nFrequencies/8)-2;
+    }
+
+
+    public static int calculateNumberOfMessageBlocks(int nFrequencies, int nMaxBytes) {
+        return (int) Math.ceil((nMaxBytes+2) / (double) (nFrequencies/8));
     }
 
     /**
