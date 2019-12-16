@@ -38,6 +38,7 @@ import java.io.IOException;
 import at.ac.fhstp.sonitalk.SoniTalkConfig;
 import at.ac.fhstp.sonitalk.exceptions.ConfigException;
 import at.ac.fhstp.sonitalk.utils.ConfigFactory;
+import at.ac.fhstp.sonitalk.utils.EncoderUtils;
 
 public class SettingsFragment extends PreferenceFragment {
 
@@ -374,36 +375,8 @@ public class SettingsFragment extends PreferenceFragment {
     private void resetSettings() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         SharedPreferences.Editor editor = preferences.edit();
-        SoniTalkConfig config = getDefaultSettings();
-
-        editor.putString(ConfigConstants.FREQUENCY_ZERO, String.valueOf(config.getFrequencyZero()));
-        editor.putString(ConfigConstants.BIT_PERIOD, String.valueOf(config.getBitperiod()));
-        editor.putString(ConfigConstants.PAUSE_PERIOD, String.valueOf(config.getPauseperiod()));
-        editor.putString(ConfigConstants.SPACE_BETWEEN_FREQUENCIES, String.valueOf(config.getFrequencySpace()));
-        editor.putString(ConfigConstants.NUMBER_OF_BYTES, String.valueOf((config.getnMessageBlocks()*2-2)));
-        editor.putString(ConfigConstants.LOUDNESS, ConfigConstants.SETTING_LOUDNESS_DEFAULT);
-        editor.putString(ConfigConstants.PRESET, String.valueOf("default_config.json"));
-
-        /*editor.putString(ConfigConstants.FREQUENCY_ZERO, ConfigConstants.SETTING_FREQUENCY_ZERO_DEFAULT);
-        editor.putString(ConfigConstants.BIT_PERIOD, ConfigConstants.SETTING_BIT_PERIOD_DEFAULT);
-        editor.putString(ConfigConstants.PAUSE_PERIOD, ConfigConstants.SETTING_PAUSE_PERIOD_DEFAULT);
-        editor.putString(ConfigConstants.SPACE_BETWEEN_FREQUENCIES, ConfigConstants.SETTING_SPACE_BETWEEN_FREQUENCIES_DEFAULT);
-        editor.putString(ConfigConstants.NUMBER_OF_BYTES, ConfigConstants.SETTING_NUMBER_OF_BYTES_DEFAULT);
-        editor.putInt(ConfigConstants.LOUDNESS, ConfigConstants.SETTING_LOUDNESS_DEFAULT);*/
-        editor.apply();
-        editor.commit();
-
-        etFrequencyZero.setText(String.valueOf(config.getFrequencyZero()));
-        etBitperiod.setText(String.valueOf(config.getBitperiod()));
-        etPauseperiod.setText(String.valueOf(config.getPauseperiod()));
-        etFrequencyspace.setText(String.valueOf(config.getFrequencySpace()));
-        etNMaxCharacters.setText(String.valueOf(config.getnMessageBlocks()*2-2));
-        lpNumberOfFrequencies.setValueIndex(1);
-
-        String presetsStr = String.format(getString(R.string.settings_preset_title), String.valueOf("default_config.json"));
-        prefPresets.setTitle(presetsStr);
-
-        setPreferenceValues();
+        SoniTalkConfig defaultConfig = getDefaultConfig();
+        setToConfig(defaultConfig, "default_config.json");
     }
 
     private void setPreferenceValues(){
@@ -443,7 +416,7 @@ public class SettingsFragment extends PreferenceFragment {
         prefPresets.setTitle(prPresets);
     }
 
-    private SoniTalkConfig getDefaultSettings(){
+    private SoniTalkConfig getDefaultConfig(){
         SoniTalkConfig config = null;
         try {
             config = ConfigFactory.getDefaultConfig(getContext());
@@ -462,21 +435,24 @@ public class SettingsFragment extends PreferenceFragment {
         editor.putString(ConfigConstants.FREQUENCY_ZERO, String.valueOf(config.getFrequencyZero()));
         editor.putString(ConfigConstants.BIT_PERIOD, String.valueOf(config.getBitperiod()));
         editor.putString(ConfigConstants.PAUSE_PERIOD, String.valueOf(config.getPauseperiod()));
+        editor.putString(ConfigConstants.NUMBER_OF_FREQUENCIES, String.valueOf(config.getnFrequencies()));
         editor.putString(ConfigConstants.SPACE_BETWEEN_FREQUENCIES, String.valueOf(config.getFrequencySpace()));
-        editor.putString(ConfigConstants.NUMBER_OF_BYTES, String.valueOf((config.getnMessageBlocks()*2-2)));
+        editor.putString(ConfigConstants.NUMBER_OF_BYTES, String.valueOf(EncoderUtils.getMaxChars(config.getnMessageBlocks(), config.getnFrequencies())));
         editor.putString(ConfigConstants.LOUDNESS, ConfigConstants.SETTING_LOUDNESS_DEFAULT);
         editor.putString(ConfigConstants.PRESET, configName);
 
         editor.apply();
-        editor.commit();
 
         etFrequencyZero.setText(String.valueOf(config.getFrequencyZero()));
         etBitperiod.setText(String.valueOf(config.getBitperiod()));
         etPauseperiod.setText(String.valueOf(config.getPauseperiod()));
         etFrequencyspace.setText(String.valueOf(config.getFrequencySpace()));
-        etNMaxCharacters.setText(String.valueOf(config.getnMessageBlocks()*2-2));
+        etNMaxCharacters.setText(String.valueOf(EncoderUtils.getMaxChars(config.getnMessageBlocks(), config.getnFrequencies())));
 
         lpNumberOfFrequencies.setValueIndex(checkFrequencyListViewIndex(String.valueOf(config.getnFrequencies())));
+
+        String presetsStr = String.format(getString(R.string.settings_preset_title), configName);
+        prefPresets.setTitle(presetsStr);
 
         setPreferenceValues();
     }

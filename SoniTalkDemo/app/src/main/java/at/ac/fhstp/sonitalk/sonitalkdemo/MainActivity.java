@@ -389,7 +389,7 @@ public class MainActivity extends BaseActivity implements SoniTalkDecoder.Messag
             config.setFrequencyZero(f0);
             config.setBitperiod(bitperiod);
             config.setPauseperiod(pauseperiod);
-            int nMessageBlocks = (nMaxBytes+2) / 2; // Default is 10 (transmitting 20 bytes with 16 frequencies)
+            int nMessageBlocks = calculateNumberOfMessageBlocks(nFrequencies, nMaxBytes);// Default is 10 (transmitting 20 bytes with 16 frequencies)
             config.setnMessageBlocks(nMessageBlocks);
             config.setnFrequencies(nFrequencies);
             config.setFrequencySpace(frequencySpace);
