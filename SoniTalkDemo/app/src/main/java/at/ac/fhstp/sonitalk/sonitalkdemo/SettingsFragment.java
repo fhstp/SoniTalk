@@ -429,7 +429,7 @@ public class SettingsFragment extends PreferenceFragment {
         String prefNMaxCharacters = String.format(getString(R.string.settings_maxbytes_text), String.valueOf(nMaxCharacters));
         etNMaxCharacters.setTitle(prefNMaxCharacters);
 
-        String numberOfFrequencies = sp.getString(lpNumberOfFrequencies.getKey(), ConfigConstants.SETTING_FREQUENCY_ZERO_DEFAULT);
+        String numberOfFrequencies = sp.getString(lpNumberOfFrequencies.getKey(), ConfigConstants.SETTING_NUMBER_OF_FREQUENCIES_DEFAULT);
         String prefNumberOfFrequencies = String.format(getString(R.string.settings_numberoffrequencies_text), String.valueOf(numberOfFrequencies));
         lpNumberOfFrequencies.setTitle(prefNumberOfFrequencies);
         lpNumberOfFrequencies.setValueIndex(checkFrequencyListViewIndex(numberOfFrequencies));
