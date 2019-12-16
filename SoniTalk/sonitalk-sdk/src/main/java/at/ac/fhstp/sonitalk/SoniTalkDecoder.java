@@ -189,20 +189,20 @@ public class SoniTalkDecoder {
         this.startFactor = startFactor;
         this.endFactor = endFactor;
 
+        bandpassWidth = DecoderUtils.getBandpassWidth(nFrequencies, frequencySpace);
 
         //Log.d("AllSettings", "silentmode: " + String.valueOf(silentMode) + " f0: " + f0 + " bitperiod: " + bitperiod + " pauseperiod: " + pauseperiod + " maxChar: " + nMaxCharacters + " nFreq: " + nFrequencies + " freqSpacing: " + frequencySpace + " freqOffSpec: " + frequencyOffsetForSpectrogram + " stepFactor: " + stepFactor);
         /*Log.d("AllSettings", "silentmode: " + String.valueOf(this.silentMode));
         Log.d("AllSettings", "f0: " + f0);
         Log.d("AllSettings", "bitperiod: " + bitperiod);
         Log.d("AllSettings", "pauseperiod: " + pauseperiod);
-        Log.d("AllSettings", "maxChar: " + nMaxCharacters);
+        //Log.d("AllSettings", "maxChar: " + this.config.);
         Log.d("AllSettings", "nFreq: " + nFrequencies);
         Log.d("AllSettings", "freqSpacing: " + frequencySpace);
         Log.d("AllSettings", "freqOffSpec: " + this.frequencyOffsetForSpectrogram);
         Log.d("AllSettings", "stepFactor: " + this.stepFactor);
+        Log.d("AllSettings", "bandpassWidth: " + this.bandpassWidth);
         */
-
-        bandpassWidth = frequencySpace *(nFrequencies /2);
 
         winLenForSpectrogram = bitperiod;
         winLenForSpectrogramInSamples = Math.round(Fs * (float) winLenForSpectrogram/1000);

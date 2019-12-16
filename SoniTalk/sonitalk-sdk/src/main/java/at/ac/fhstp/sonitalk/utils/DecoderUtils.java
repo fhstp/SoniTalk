@@ -201,4 +201,8 @@ public final class DecoderUtils {
     }
 
 
+    public static int getBandpassWidth(int nFrequencies, int frequencySpace) {
+        return (int) Math.round((frequencySpace * (nFrequencies-1)) / 2.0);
+    }
+
 }

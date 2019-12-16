@@ -41,4 +41,11 @@ public class DecoderUtilsTest {
         assertEquals(64, DecoderUtils.nextPowerOfTwo(64));
         assertEquals(4096, DecoderUtils.nextPowerOfTwo(2205));
     }
+
+    @Test
+    public void bandpassWidth() throws Exception {
+        assertEquals(750, DecoderUtils.getBandpassWidth(16, 100));
+        assertEquals(350, DecoderUtils.getBandpassWidth(8, 100));
+        assertEquals(375, DecoderUtils.getBandpassWidth(16, 50));
+    }
 }
