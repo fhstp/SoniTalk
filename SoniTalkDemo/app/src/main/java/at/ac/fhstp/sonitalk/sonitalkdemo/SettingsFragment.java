@@ -214,11 +214,11 @@ public class SettingsFragment extends PreferenceFragment {
                     showToastNoNumericCharacterEntered();
                     return false;
                 }
-                if (newValue.toString().length()<ConfigConstants.SETTING_NUMBER_OF_BYTES_LOWER_LIMIT){
+                if (Integer.valueOf(newValue.toString())<ConfigConstants.SETTING_NUMBER_OF_BYTES_LOWER_LIMIT){
                     showToastLowerLimitExceeded(ConfigConstants.SETTING_NUMBER_OF_BYTES_LOWER_LIMIT);
                     return false;
                 }
-                if (newValue.toString().length()>ConfigConstants.SETTING_NUMBER_OF_BYTES_UPPER_LIMIT){
+                if (Integer.valueOf(newValue.toString())>ConfigConstants.SETTING_NUMBER_OF_BYTES_UPPER_LIMIT){
                     showToastUpperLimitExceeded(ConfigConstants.SETTING_NUMBER_OF_BYTES_UPPER_LIMIT);
                     return false;
                 }
