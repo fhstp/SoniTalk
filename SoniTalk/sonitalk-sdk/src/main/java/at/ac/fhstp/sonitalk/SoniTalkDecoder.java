@@ -768,7 +768,7 @@ public class SoniTalkDecoder {
         }
 
         //decode using spectrogram
-        int[] messageDecodedBySpec = new int[(nBlocks-2)/2 * config.getnFrequencies()];
+        int[] messageDecodedBySpec = new int[(nBlocks-2)/2 * config.getnFrequencies()]; // -2 for the start and end block, divide by two because a bit is encoded by two consecutive pulses on one frequency: either (send, notSend) or (notSend, send)
         arrayCounter = 0;
         // Go through all message blocks, skipping start and end block with a stepsize of 2 (because we always have a normal block and an inverted block)
         for(int j = 1; j<nBlocks-1; j=j+2){

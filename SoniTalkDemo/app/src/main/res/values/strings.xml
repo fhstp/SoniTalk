@@ -41,8 +41,8 @@
     <string name="action_reset_settings_message">Do you want to reset all settings?</string>
     <string name="action_reset_settings_title">Reset Settings</string>
     <string name="signal_generator_not_created">No Signal was created yet!</string>
-    <string name="encoder_exception_text_too_long">The text is too long please type in a shorter message!</string>
-    <string name="encoder_exception_text_too_many_bytes">Too many bytes entered</string>
+    <string name="encoder_exception_text_too_long">The text is too long! Maximum message length (%d bytes)</string>
+    <string name="encoder_exception_text_too_many_bytes">The text is too long! Emojis and non ASCII characters take several bytes. Maximum message length (%d bytes)</string>
     <string name="decoder_exception_state">Failed to start listening, error message :</string>
     <string name="decoder_exception_io">Failed to start listening due to an error on loading the default detection profile, details:</string>
     <string name="decoder_exception_config">Failed to start listening due to an error on loading the default detection profile, details:</string>

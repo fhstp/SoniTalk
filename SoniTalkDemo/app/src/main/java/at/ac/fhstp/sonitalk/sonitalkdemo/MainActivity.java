@@ -281,9 +281,13 @@ public class MainActivity extends BaseActivity implements SoniTalkDecoder.Messag
             final byte[] bytes = textToSend.getBytes(StandardCharsets.UTF_8);
 
             if (textToSend.length() > nMaxBytes) {
-                Toast.makeText(getApplicationContext(), getString(R.string.encoder_exception_text_too_long), Toast.LENGTH_LONG).show();
+                // Too many characters
+                String tooManyCharacters = String.format(getString(R.string.encoder_exception_text_too_long), nMaxBytes);
+                Toast.makeText(getApplicationContext(), tooManyCharacters, Toast.LENGTH_LONG).show();
             } else if(!EncoderUtils.isAllowedByteArraySize(bytes, config)){
-                Toast.makeText(getApplicationContext(), getString(R.string.encoder_exception_text_too_long), Toast.LENGTH_LONG).show();
+                // Too many bytes: muti-bytes characters and emojis require several bytes
+                String tooManyBytes = String.format(getString(R.string.encoder_exception_text_too_many_bytes), nMaxBytes);
+                Toast.makeText(getApplicationContext(), tooManyBytes, Toast.LENGTH_LONG).show();
             } else {
                 // Move the background execution handling away from the Activity (in Encoder or Service or AsyncTask). Creating Runnables here may leak the Activity
                 threadPool.execute(new Runnable() {

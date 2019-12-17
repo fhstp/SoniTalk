@@ -36,7 +36,7 @@ public class ConfigConstants {
     public static final String SETTING_NUMBER_OF_FREQUENCIES_DEFAULT = "16";
     public static final String SETTING_SPACE_BETWEEN_FREQUENCIES_DEFAULT = "100";
     public static final String SETTING_NUMBER_OF_BYTES_DEFAULT = "18";
-    public static final String SETTING_LOUDNESS_DEFAULT = "70";
+    public static final String SETTING_LOUDNESS_DEFAULT = "40";
 
 
     public static final int SETTING_BIT_PERIOD_LOWER_LIMIT = 30;
@@ -47,7 +47,7 @@ public class ConfigConstants {
     public static final int SETTING_FREQUENCY_ZERO_UPPER_LIMIT = 20000;
     public static final int SETTING_NUMBER_OF_BYTES_LOWER_LIMIT = 2;
     public static final int SETTING_NUMBER_OF_BYTES_UPPER_LIMIT = 30;
-    public static final int SETTING_SPACE_BETWEEN_FREQUENCIES_LOWER_LIMIT = 50;
+    public static final int SETTING_SPACE_BETWEEN_FREQUENCIES_LOWER_LIMIT = 40;
     public static final int SETTING_SPACE_BETWEEN_FREQUENCIES_UPPER_LIMIT = 200;
     public static final int SETTING_LOUDNESS_LOWER_LIMIT = 1;
     public static final int SETTING_LOUDNESS_UPPER_LIMIT = 100;
