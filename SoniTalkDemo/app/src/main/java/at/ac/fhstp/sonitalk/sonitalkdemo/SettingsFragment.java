@@ -375,6 +375,8 @@ public class SettingsFragment extends PreferenceFragment {
     private void resetSettings() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(ConfigConstants.LOUDNESS, ConfigConstants.SETTING_LOUDNESS_DEFAULT);
+        sbprefLoudness.setText(ConfigConstants.SETTING_LOUDNESS_DEFAULT);
         SoniTalkConfig defaultConfig = getDefaultConfig();
         setToConfig(defaultConfig, "default_config.json");
     }
@@ -438,7 +440,6 @@ public class SettingsFragment extends PreferenceFragment {
         editor.putString(ConfigConstants.NUMBER_OF_FREQUENCIES, String.valueOf(config.getnFrequencies()));
         editor.putString(ConfigConstants.SPACE_BETWEEN_FREQUENCIES, String.valueOf(config.getFrequencySpace()));
         editor.putString(ConfigConstants.NUMBER_OF_BYTES, String.valueOf(EncoderUtils.getMaxChars(config.getnMessageBlocks(), config.getnFrequencies())));
-        editor.putString(ConfigConstants.LOUDNESS, ConfigConstants.SETTING_LOUDNESS_DEFAULT);
         editor.putString(ConfigConstants.PRESET, configName);
 
         editor.apply();
@@ -448,7 +449,6 @@ public class SettingsFragment extends PreferenceFragment {
         etPauseperiod.setText(String.valueOf(config.getPauseperiod()));
         etFrequencyspace.setText(String.valueOf(config.getFrequencySpace()));
         etNMaxCharacters.setText(String.valueOf(EncoderUtils.getMaxChars(config.getnMessageBlocks(), config.getnFrequencies())));
-
         lpNumberOfFrequencies.setValueIndex(checkFrequencyListViewIndex(String.valueOf(config.getnFrequencies())));
 
         String presetsStr = String.format(getString(R.string.settings_preset_title), configName);
