@@ -23,6 +23,7 @@ import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.os.Handler;
+import android.os.Process;
 import android.support.annotation.IntDef;
 import android.util.Log;
 
@@ -311,6 +312,11 @@ public class SoniTalkDecoder {
         }
 
         setDecoderState(STATE_LISTENING);
+        try {
+            android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_URGENT_AUDIO);
+        } catch (IllegalArgumentException | SecurityException ex) {
+            // Ignore
+        }
 
         while (!isLoopStopped()) {
             //for(int audioIndex = 0; audioIndex < stepFactor && !loopStopped; audioIndex++) { // NOTE: This for loop was used to know when a full winLen had been read, currently not used.
@@ -915,6 +921,11 @@ public class SoniTalkDecoder {
         setLoopStopped(true);
         setDecoderState(STATE_CANCELLED);
         soniTalkContext.cancelNotificationReceiving();
+        try {
+            android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
+        } catch (IllegalArgumentException | SecurityException ex) {
+            // Ignore
+        }
     }
 
     /**
