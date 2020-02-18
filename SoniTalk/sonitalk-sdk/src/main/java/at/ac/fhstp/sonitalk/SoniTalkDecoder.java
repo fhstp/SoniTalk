@@ -151,9 +151,9 @@ public class SoniTalkDecoder {
     private boolean loopStopped = false;
     private Handler delayhandler = new Handler();
     private ExecutorService threadExecutor = Executors.newSingleThreadExecutor();
+    private ExecutorService threadAnalyzeExecutor = Executors.newSingleThreadExecutor();
+    private Object syncThreadAnalyzeExecutor = new Object();
     private int decoderState = STATE_INITIALIZED;
-
-    private long readTimestamp;
 
     private CRC crc;
 
@@ -317,7 +317,6 @@ public class SoniTalkDecoder {
             // ACTUAL AUDIO READ
             readBytes = audioRecorder.read(tempBuffer, 0, neededBytes);
 
-            readTimestamp = System.nanoTime();
             if (readBytes != neededBytes) {
                 //Log.e(TAG, "ERROR " + readBytes);
             } else {
@@ -333,7 +332,18 @@ public class SoniTalkDecoder {
                     //Log.d("HisoryBuffercounter", "Counter " + counter);
                     //Log.d("HisoryBuffersize", "Size " + historyBuffer.size());
                 } else { // At this point the buffer is very close to be full
-                    analyzeHistoryBuffer();
+                    synchronized (syncThreadAnalyzeExecutor) {
+                        if (threadAnalyzeExecutor.isShutdown()) {
+                            Log.d(TAG, "Thread was terminated already");
+                        } else {
+                            threadAnalyzeExecutor.execute(new Runnable() {
+                                @Override
+                                public void run() {
+                                    analyzeHistoryBuffer();
+                                }
+                            });
+                        }
+                    }
                 }
                 counter++; // Octave version put it at the end
             }
@@ -428,6 +438,7 @@ public class SoniTalkDecoder {
 
 
     private void analyzeHistoryBuffer(){
+        long readTimestamp = System.nanoTime();
         /* Will try with saving the whole buffer directly
         float firstWindow[];
         float lastWindow[];
@@ -605,7 +616,7 @@ public class SoniTalkDecoder {
                 // THIS IS TRUE IN CASE WE FOUND AN END FRAME NOW ITS TIME TO DECODE THE MESSAGE IN BETWEEN
                 //Log.d("EndResponseAvg", "detection with factor: " + sumAbsEndResponseLower / sumAbsEndResponseUpper + " and " + sumAbsStartResponseUpper/sumAbsStartResponseLower);
 
-                analyzeMessage(analysisHistoryBuffer);
+                analyzeMessage(analysisHistoryBuffer, readTimestamp);
 
             }
 
@@ -616,7 +627,7 @@ public class SoniTalkDecoder {
         }
     }
 
-    private void analyzeMessage(float[] analysisHistoryBuffer) {
+    private void analyzeMessage(float[] analysisHistoryBuffer, long readTimestamp) {
         int overlapForSpectrogramInSamples = winLenForSpectrogramInSamples - analysisWinStep;
         //int overlapForSpectrogramInSamples = Math.round(winLenForSpectrogramInSamples * 0.875f);
 
@@ -970,6 +981,12 @@ public class SoniTalkDecoder {
         List<Runnable> cancelledRunnables = threadExecutor.shutdownNow();
         if (!cancelledRunnables.isEmpty())
             Log.d(TAG, "Cancelled " + cancelledRunnables.size() + " tasks.");
+
+        synchronized (syncThreadAnalyzeExecutor) {
+            List<Runnable> cancelledAnalyzeRunnables = threadAnalyzeExecutor.shutdownNow();
+            if (!cancelledAnalyzeRunnables.isEmpty())
+                Log.d(TAG, "Cancelled " + cancelledAnalyzeRunnables.size() + " tasks.");
+        }
     }
 
     /**
