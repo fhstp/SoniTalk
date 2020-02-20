@@ -1,8 +1,8 @@
 {
   "frequency-zero": 18000,
-  "bit-period": 50,
+  "bit-period": 100,
   "pause-period": 0,
-  "number-of-message-blocks": 10,
+  "number-of-message-blocks": 8,
   "number-of-frequencies": 16,
   "space-between-frequencies": 100
 }
