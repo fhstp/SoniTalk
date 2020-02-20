@@ -25,8 +25,8 @@
     <string name="l0permissionRequestExplanation">Für die Kommunikation ist die \"Data-over-sound\"-Berechtigung erforderlich.</string>
     <string name="action_reset_settings_message">Möchten Sie alle Einstellungen zurücksetzen?</string>
     <string name="signal_generator_not_created">Es wurde kein Signal generiert!</string>
-    <string name="encoder_exception_text_too_long">Der Text ist zu lang. Maximale Nachrichtenlänge (%s Bytes)</string>
-    <string name="encoder_exception_text_too_many_bytes">Der Text ist zu lang. Emojis und Nicht-ASCII-Zeichen benötigen mehrere Bytes. Maximale Nachrichtenlänge (%s Bytes)</string>
+    <string name="encoder_exception_text_too_long">Der Text ist zu lang. Maximale Nachrichtenlänge (%d Bytes)</string>
+    <string name="encoder_exception_text_too_many_bytes">Der Text ist zu lang. Emojis und Nicht-ASCII-Zeichen benötigen mehrere Bytes. Maximale Nachrichtenlänge (%d Bytes)</string>
     <string name="decoder_exception_state">Akustischer Empfang ist fehlgeschlagen. Fehlermeldung:</string>
     <string name="decoder_exception_io">Akustischer Empfang ist aufgrund eines Ladefehlers des Standard-Erkennungsprofils fehlgeschlagen, Details:</string>
     <string name="decoder_exception_config">Akustischer Empfang ist aufgrund eines Ladefehlers des Standard-Erkennungsprofils fehlgeschlagen, Details:</string>
