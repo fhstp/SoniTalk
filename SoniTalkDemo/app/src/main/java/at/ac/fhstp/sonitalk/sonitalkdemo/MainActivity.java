@@ -109,6 +109,8 @@ public class MainActivity extends BaseActivity implements SoniTalkDecoder.Messag
 
     boolean silentMode;
     private Toast currentToast;
+    private long timeLastCorrectMessageReceived = 0;
+    private static final long INTERVAL_SAME_MESSAGE = 100000000; //ns --> 100ms
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -513,64 +515,72 @@ public class MainActivity extends BaseActivity implements SoniTalkDecoder.Messag
 
     @Override
     public void onMessageReceived(final SoniTalkMessage receivedMessage) {
-        /*
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                setReceivedText(DecoderUtils.byteToUTF8(receivedMessage));
+        long timeNow = System.nanoTime();
+        Log.d(TAG, "onMessageReceived: " + timeNow);
+        Log.d(TAG, "onMessageReceived: " + timeLastCorrectMessageReceived);
+
+        // Only check the content if we did not receive the correct message in the last INTERVAL_SAME_MESSAGE
+        if (timeNow > timeLastCorrectMessageReceived + INTERVAL_SAME_MESSAGE) {
+
+            /*
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setReceivedText(DecoderUtils.byteToUTF8(receivedMessage));
+                }
+            });
+            */
+
+            if (receivedMessage.isCrcCorrect()) {
+                //Log.d("ParityCheck", "The message was correctly received");
+                timeLastCorrectMessageReceived = timeNow;
+                final String textReceived = DecoderUtils.byteToUTF8(receivedMessage.getMessage());
+                //Log.d("Received message", textReceived);
+
+                // We stop when CRC is correct and we are not in silent mode
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Update text displayed
+                        setReceivedText(textReceived + " (" + String.valueOf(receivedMessage.getDecodingTimeNanosecond() / 1000000) + "ms)");
+
+                        if (currentToast != null) {
+                            currentToast.cancel(); // NOTE: Cancel so fast that only the last one in a series really is displayed.
+                        }
+                        // Stops recording if needed and shows a Toast
+                        if (!silentMode) {
+                            // STOP everything.
+                            stopDecoder();
+                            //                        currentToast = Toast.makeText(MainActivity.this, "Correctly received a message. Stopped.", Toast.LENGTH_SHORT);
+                            //                        currentToast.show();
+                        } else {
+                            //                        currentToast = Toast.makeText(MainActivity.this, "Correctly received a message. Keep listening.", Toast.LENGTH_SHORT);
+                            //                        currentToast.show();
+                        }
+                    }
+                });
+            } else {
+                //Log.d("ParityCheck", "The message was NOT correctly received");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //main.setReceivedText("Please try again, could not detect or decode the message!");
+
+                        if (currentToast != null) {
+                            currentToast.cancel(); // NOTE: Cancel so fast that only the last one in a series really is displayed.
+                        }
+                        if (!silentMode) {
+                            setReceivedText(getString(R.string.detection_crc_incorrect));
+                            //                        currentToast = Toast.makeText(MainActivity.this, getString(R.string.detection_crc_incorrect_toast_message), Toast.LENGTH_LONG);
+                            //                        currentToast.show();
+                        } else {
+                            setReceivedText(getString(R.string.detection_crc_incorrect_keep_listening));
+                            //                        currentToast = Toast.makeText(MainActivity.this, getString(R.string.detection_crc_incorrect_keep_listening_toast_message), Toast.LENGTH_LONG);
+                            //                        currentToast.show();
+                        }
+                    }
+                });
             }
-        });
-        */
-
-        if(receivedMessage.isCrcCorrect()){
-            //Log.d("ParityCheck", "The message was correctly received");
-            final String textReceived = DecoderUtils.byteToUTF8(receivedMessage.getMessage());
-            //Log.d("Received message", textReceived);
-
-            // We stop when CRC is correct and we are not in silent mode
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    // Update text displayed
-                    setReceivedText(textReceived + " (" + String.valueOf(receivedMessage.getDecodingTimeNanosecond() / 1000000) + "ms)");
-
-                    if (currentToast != null) {
-                        currentToast.cancel(); // NOTE: Cancel so fast that only the last one in a series really is displayed.
-                    }
-                    // Stops recording if needed and shows a Toast
-                    if (!silentMode) {
-                        // STOP everything.
-                        stopDecoder();
-//                        currentToast = Toast.makeText(MainActivity.this, "Correctly received a message. Stopped.", Toast.LENGTH_SHORT);
-//                        currentToast.show();
-                    } else {
-//                        currentToast = Toast.makeText(MainActivity.this, "Correctly received a message. Keep listening.", Toast.LENGTH_SHORT);
-//                        currentToast.show();
-                    }
-                }
-            });
-        } else {
-            //Log.d("ParityCheck", "The message was NOT correctly received");
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    //main.setReceivedText("Please try again, could not detect or decode the message!");
-
-                    if (currentToast != null) {
-                        currentToast.cancel(); // NOTE: Cancel so fast that only the last one in a series really is displayed.
-                    }
-                    if (!silentMode) {
-                        setReceivedText(getString(R.string.detection_crc_incorrect));
-//                        currentToast = Toast.makeText(MainActivity.this, getString(R.string.detection_crc_incorrect_toast_message), Toast.LENGTH_LONG);
-//                        currentToast.show();
-                    }
-                    else {
-                        setReceivedText(getString(R.string.detection_crc_incorrect_keep_listening));
-//                        currentToast = Toast.makeText(MainActivity.this, getString(R.string.detection_crc_incorrect_keep_listening_toast_message), Toast.LENGTH_LONG);
-//                        currentToast.show();
-                    }
-                }
-            });
         }
     }
 
