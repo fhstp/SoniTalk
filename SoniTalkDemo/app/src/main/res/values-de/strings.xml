@@ -80,4 +80,7 @@
     <string name="show_toast_no_numeric_character_entered">Bitte geben Sie nur numerische Werte ein!</string>
     <string name="show_toast_lower_limit_exceeded">Bitte geben sie einen Wert über dem Limit von %d ein!</string>
     <string name="show_toast_higher_limit_exceeded">Bitte geben sie einen Wert unter dem Limit von %d ein!</string>
+    <string name="receive_button">Empfangen-Schaltfläche</string>
+    <string name="send_button">Senden-Schaltfläche</string>
+    <string name="edtSignalText_hint">Text zum Senden</string>
 </resources>

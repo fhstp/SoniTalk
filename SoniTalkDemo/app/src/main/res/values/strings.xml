@@ -97,4 +97,7 @@
     <string name="show_toast_no_numeric_character_entered">Please enter only numeric values!</string>
     <string name="show_toast_lower_limit_exceeded">Please enter a value above the limit of %d!</string>
     <string name="show_toast_higher_limit_exceeded">Please enter a value below the limit of %d!</string>
+    <string name="receive_button">Receive button</string>
+    <string name="send_button">Send button</string>
+    <string name="edtSignalText_hint">Text to send</string>
 </resources>

@@ -28,11 +28,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:layout_height="match_parent">
 
-        <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <android.support.constraint.ConstraintLayout
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
@@ -50,7 +48,8 @@
                 android:src="@drawable/baseline_hearing_grey_48"
                 app:layout_constraintBottom_toBottomOf="@+id/txtDecodedText"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/txtDecodedText" />
+                app:layout_constraintTop_toTopOf="@+id/txtDecodedText"
+                android:contentDescription="@string/receive_button" />
 
 
 
@@ -63,7 +62,8 @@
                 android:src="@drawable/ic_volume_up_grey_48dp"
                 app:layout_constraintBottom_toBottomOf="@+id/edtSignalText"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/edtSignalText" />
+                app:layout_constraintTop_toTopOf="@+id/edtSignalText"
+                android:contentDescription="@string/send_button" />
 
             <Button
                 android:id="@+id/btnStop"
@@ -88,7 +88,9 @@
                 android:text="Hallo SoniTalk"
                 app:layout_constraintEnd_toStartOf="@+id/btnPlay"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                android:importantForAutofill="no"
+                android:hint="@string/edtSignalText_hint"/>
 
             <TextView
                 android:id="@+id/txtHeader"
@@ -121,9 +123,11 @@
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="139dp"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/logo_sonitalk_final"
-                tools:layout_editor_absoluteX="0dp" />
+                tools:layout_editor_absoluteX="0dp"
+                android:contentDescription="SoniTalk logo" />
 
             <TextView
                 android:id="@+id/textView2"
