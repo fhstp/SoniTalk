@@ -110,7 +110,7 @@ public class MainActivity extends BaseActivity implements SoniTalkDecoder.Messag
     boolean silentMode;
     private Toast currentToast;
     private long timeLastCorrectMessageReceived = 0;
-    private static final long INTERVAL_SAME_MESSAGE = 100000000; //ns --> 100ms
+    private static final long INTERVAL_SAME_MESSAGE = 200000000; //ns --> 200ms
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
